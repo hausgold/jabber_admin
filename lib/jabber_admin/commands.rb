@@ -2,6 +2,7 @@
 
 require 'jabber_admin/commands/ban_account'
 require 'jabber_admin/commands/create_room'
+require 'jabber_admin/commands/create_room_with_opts'
 require 'jabber_admin/commands/register'
 require 'jabber_admin/commands/restart'
 require 'jabber_admin/commands/send_direct_invitation'
