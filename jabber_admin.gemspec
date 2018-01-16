@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "jabber_admin"
   spec.version       = JabberAdmin::VERSION
   spec.authors       = ["Henning Vogt"]
+  spec.licenses      = ['MIT']
   spec.email         = ["henning.vogt@hausgold.de"]
 
   spec.summary       = %q{Library for the Ejabberd RESTful admin API}
