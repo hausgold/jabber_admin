@@ -6,9 +6,9 @@ RSpec.describe JabberAdmin::ApiCall do
   describe '.perform' do
     context 'when api call is not successful' do
       it 'raises an error' do
-        allow(described_class)
-          .to receive(:post)
-          .and_return(OpenStruct.new(success?: false))
+        allow(RestClient::Request)
+          .to receive(:execute)
+          .and_return(OpenStruct.new(code: 400))
 
         expect { described_class.perform('foobar') }
           .to raise_error(JabberAdmin::ApiError)
@@ -16,11 +16,11 @@ RSpec.describe JabberAdmin::ApiCall do
     end
 
     context 'when api call is successful' do
-      let(:response) { OpenStruct.new(success?: true, body: 'foobar') }
+      let(:response) { OpenStruct.new(code: 200, body: 'foobar') }
 
       it 'returns the response' do
-        allow(described_class)
-          .to receive(:post)
+        allow(RestClient::Request)
+          .to receive(:execute)
           .and_return(response)
 
         expect(described_class.perform('register')).to eq(response)

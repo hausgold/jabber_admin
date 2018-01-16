@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "active_support/inflector"
-require "httparty"
+require "rest-client"
 
 require "jabber_admin/configuration"
 require "jabber_admin/commands"
@@ -57,5 +57,4 @@ module JabberAdmin
   rescue NameError
     super
   end
-
 end

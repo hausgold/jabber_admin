@@ -8,9 +8,6 @@ module JabberAdmin
   class ApiCall
     attr_reader :command, :payload
 
-    include HTTParty
-    base_uri JabberAdmin.configuration.api_host
-
     def self.perform(command, payload = {})
       new(command, payload).perform
     end
@@ -21,7 +18,7 @@ module JabberAdmin
     end
 
     def perform
-      raise(ApiError, response.to_s) unless response.success?
+      raise(ApiError, response.to_s) if response.code != 200
 
       response
     end
@@ -29,18 +26,17 @@ module JabberAdmin
     private
 
     def response
-      @res ||= self.class.post("/api/#{command}", body: body, basic_auth: auth)
+      @res ||= RestClient::Request.execute(
+        method: :post,
+        url: url,
+        user: JabberAdmin.configuration.admin,
+        password: JabberAdmin.configuration.password,
+        payload: payload.to_json
+      )
     end
 
-    def auth
-      {
-        username: JabberAdmin.configuration.admin,
-        password: JabberAdmin.configuration.password
-      }
-    end
-
-    def body
-      payload.to_json
+    def url
+      "#{JabberAdmin.configuration.api_host}/api/#{@command}"
     end
   end
 end

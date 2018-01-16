@@ -17,3 +17,11 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+# Set JabberAdmin configuration
+# Is available in all Specs
+JabberAdmin.configure do |config|
+  config.api_host = 'https://jabber.example.local'
+  config.admin = "admin"
+  config.password = "password"
+end
