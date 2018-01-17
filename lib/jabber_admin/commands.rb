@@ -9,6 +9,7 @@ require 'jabber_admin/commands/send_direct_invitation'
 require 'jabber_admin/commands/subscribe_room'
 require 'jabber_admin/commands/unsubscribe_room'
 require 'jabber_admin/commands/unregister'
+require 'jabber_admin/commands/set_room_affiliation'
 
 ##
 # Contains alle commands that are supported
