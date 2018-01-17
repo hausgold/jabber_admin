@@ -3,6 +3,7 @@
 require "active_support/inflector"
 require "rest-client"
 
+require "jabber_admin/initializer"
 require "jabber_admin/configuration"
 require "jabber_admin/commands"
 require "jabber_admin/api_call"
