@@ -1,9 +1,9 @@
-# JabberAdmin
+![jabber_admin](doc/assets/project.png)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/0b3c444d8db8acaaba97/maintainability)](https://codeclimate.com/github/hausgold/jabber_admin/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0b3c444d8db8acaaba97/test_coverage)](https://codeclimate.com/github/hausgold/jabber_admin/test_coverage)
 
-JabberAdmin is a small library to easily communicate with the Ejabberd
+jabber_admin is a small library to easily communicate with the ejabberd
 admin API.
 
 ## Installation
