@@ -33,9 +33,13 @@ Currently these basic commands are supported:
 
 - ban_account
 - create_room
+- create_room_with_opts
 - register
+- registered_users
 - restart
 - send_direct_invitation
+- send_stanza
+- set_room_affiliation
 - subscribe_room
 - unregister
 - unsubscribe_room

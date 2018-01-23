@@ -44,4 +44,19 @@ RSpec.describe JabberAdmin do
         .to eq("https://jabber.example.com")
     end
   end
+
+  describe '.registered_users!' do
+    before do
+      allow(JabberAdmin::Commands::RegisteredUsers)
+        .to receive(:call)
+
+      described_class.registered_users!(host: 'example.com')
+    end
+
+    it 'executes the right command' do
+      expect(JabberAdmin::Commands::RegisteredUsers)
+        .to have_received(:call)
+        .with(host: 'example.com')
+    end
+  end
 end
