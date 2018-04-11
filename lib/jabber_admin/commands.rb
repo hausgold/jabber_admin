@@ -4,7 +4,7 @@
 Dir["#{File.dirname(__FILE__)}/commands/**/*.rb"].each {|file| require file }
 
 ##
-# Contains alle commands that are supported
+# Contains all commands that are supported
 module JabberAdmin
   module Commands; end
 end
