@@ -2,6 +2,7 @@
 
 require "active_support/inflector"
 require "rest-client"
+require "json"
 
 require "jabber_admin/initializer"
 require "jabber_admin/configuration"

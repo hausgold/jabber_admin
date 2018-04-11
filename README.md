@@ -22,9 +22,19 @@ Or install it yourself as:
 
     $ gem install jabber_admin
 
+## Configuration
+
+```ruby
+JabberAdmin.configure do |config|
+  config.api_host = 'http://jabber.local'
+  config.admin = 'admin@jabber.local'
+  config.password = 'password'
+end
+```
+
 ## Usage
 
-``` ruby
+```ruby
 JabberAdmin.restart!
 JabberAdmin.create_room!(name: 'room1', host: '...')
 ```
