@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-# Require all commands from the commands subfolder
-Dir["#{File.dirname(__FILE__)}/commands/**/*.rb"].each {|file| require file }
-
-##
-# Contains all commands that are supported
 module JabberAdmin
+  # Contains all predefined commands that are supported.
   module Commands; end
+end
+
+# Require all commands from the commands subfolder
+Dir[Pathname.new(__dir__).join('commands', '**', '*.rb')].each do |file|
+  require file
 end

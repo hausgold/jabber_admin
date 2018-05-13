@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://jabber/api/registered_users
+    body:
+      encoding: UTF-8
+      string: '{"host":"ejabberd.local"}'
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.3.7p456
+      Content-Length:
+      - '25'
+      Host:
+      - jabber
+      Authorization:
+      - Basic YWRtaW5AZWphYmJlcmQubG9jYWw6ZGVmYXVsdHB3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '15'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '["admin","tom"]'
+    http_version: 
+  recorded_at: Sun, 13 May 2018 17:01:06 GMT
+recorded_with: VCR 3.0.3

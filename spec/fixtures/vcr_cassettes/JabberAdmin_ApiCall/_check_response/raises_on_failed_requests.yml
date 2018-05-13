@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://jabber/api/restart
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux-gnu x86_64) ruby/2.3.7p456
+      Content-Length:
+      - '2'
+      Host:
+      - jabber
+      Authorization:
+      - Basic ZmFpbDpkZWZhdWx0cHc=
+  response:
+    status:
+      code: 503
+      message: Service Unavailable
+    headers:
+      Cache-Control:
+      - no-cache
+      Connection:
+      - close
+      Content-Type:
+      - text/html
+    body:
+      encoding: UTF-8
+      string: |+
+        <html><body><h1>503 Service Unavailable</h1>
+        No server is available to handle this request.
+        </body></html>
+
+    http_version: 
+  recorded_at: Sun, 13 May 2018 09:28:39 GMT
+recorded_with: VCR 3.0.3

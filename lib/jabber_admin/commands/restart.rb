@@ -2,12 +2,15 @@
 
 module JabberAdmin
   module Commands
-    ##
-    # Restart ejabberd gracefully
-    # https://docs.ejabberd.im/developer/ejabberd-api/admin-api/#restart-restart-ejabberd-gracefully
+    # Restart ejabberd service gracefully.
+    #
+    # @see https://bit.ly/2G7YEwd
     class Restart
-      def self.call
-        JabberAdmin::ApiCall.perform 'restart'
+      # Pass the correct data to the given callable.
+      #
+      # @param callable [Proc, #call] the callable to call
+      def self.call(callable)
+        callable.call('restart')
       end
     end
   end
