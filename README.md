@@ -87,7 +87,7 @@ JabberAdmin.register(user: 'peter@example.com', password: '123')
 
 Have a close look at the method names. We support bang and non-bang variants.
 The bang variants perform in-deep response validation and raise children of
-+JabberAdmin::Error+ in case of detected issues. These issues can be
+`JabberAdmin::Error` in case of detected issues. These issues can be
 unpermitted API requests, or invalid payload values, etc. The predefined
 commands also perform response body checks when it is appropriate. (Eg. many
 commands respond a single zero as a success indicator)

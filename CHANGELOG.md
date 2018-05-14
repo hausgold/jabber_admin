@@ -10,6 +10,7 @@
   * muc_register_nick
   * send_stanza_c2s
   * set_nickname
+  * set_presence
 * The documentation was greatly improved
 * The testcases were rewritten and tested with VCR against a real ejabberd server (18.01)
 
