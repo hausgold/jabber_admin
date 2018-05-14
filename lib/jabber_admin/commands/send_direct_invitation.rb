@@ -2,23 +2,26 @@
 
 module JabberAdmin
   module Commands
-    ##
-    # Password and Message can also be: none. Users JIDs are separated with :
-    # https://docs.ejabberd.im/developer/ejabberd-api/admin-api/#send-direct-invitation-send-a-direct-invitation-to-several-destinations
+    # Send a direct invitation to several destinations.
+    #
+    # @see https://bit.ly/2wuTpr2
     class SendDirectInvitation
-      # @param [name] The room name
-      # @param [service] MUC service
-      # @param [password] Password, or none
-      # @param [reason] The reason text, or none
-      # @param [users] Users JIDs
-      def self.call(name:, service:, password:, reason:, users:)
-        joined_users = users.join(':')
-
-        JabberAdmin::ApiCall.perform(
-          'send_direct_invitation',
-          name: name, service: service, password: password, reason: reason,
-          users: joined_users
-        )
+      # Pass the correct data to the given callable.
+      #
+      # @param callable [Proc, #call] the callable to call
+      # @param room [String] room JID (eg. +room1@conference.localhost+)
+      # @param users [Array<String>] user JIDs wo/ resource
+      #   (eg. +tom@localhost+)
+      # @param password [String] a optional room password
+      # @param reason [String] the reason for the invitation
+      def self.call(callable, room:, users:, password: '', reason: '')
+        name, service = room.split('@')
+        callable.call('send_direct_invitation',
+                      name: name,
+                      service: service,
+                      password: password,
+                      reason: reason,
+                      users: users.join(':'))
       end
     end
   end

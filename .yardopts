@@ -1,0 +1,4 @@
+--output-dir=doc/app
+-
+README.md
+lib/**/*.rb

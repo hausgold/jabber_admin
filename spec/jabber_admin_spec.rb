@@ -3,60 +3,187 @@
 require 'spec_helper'
 
 RSpec.describe JabberAdmin do
-  describe '.respond_to?' do
-    it 'responds to known command' do
-      expect(described_class.respond_to?(:register!)).to eq(true)
+  describe '.configuration' do
+    it 'return a new instance of JabberAdmin::Configuration' do
+      expect(described_class.configuration).to be_a(JabberAdmin::Configuration)
     end
 
-    it 'does not respond to unknown command' do
-      expect(described_class.respond_to?(:foobar!)).to eq(false)
+    it 'memorizes the configuration instance' do
+      conf = described_class.configuration
+      expect(described_class.configuration).to be(conf)
+    end
+  end
+
+  describe '.configure' do
+    it 'yields the configuration object' do
+      conf = described_class.configuration
+      expect { |block| described_class.configure(&block) }.to \
+        yield_with_args(conf)
+    end
+
+    it 'saves the new configuration values' do
+      described_class.configure do |config|
+        config.url = 'https://jabber.local/api'
+      end
+      expect(described_class.configuration.url).to \
+        eq('https://jabber.local/api')
     end
   end
 
   describe '.method_missing' do
     before do
-      allow(JabberAdmin::Commands::Restart).to receive(:call)
+      allow(JabberAdmin::ApiCall).to receive(:perform)
+      allow(JabberAdmin::ApiCall).to receive(:perform!)
     end
 
-    context 'when command is valid' do
-      it 'calls the right command' do
-        described_class.restart!
-        expect(JabberAdmin::Commands::Restart).to have_received(:call)
+    context 'with predefined commands' do
+      context 'with bang' do
+        it 'passes the arguments down to the API call' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform!).once.with('unregister', check_res_body: false,
+                                                       user: 'tom',
+                                                       host: 'jabber.local')
+          described_class.unregister!(user: 'tom@jabber.local')
+        end
+
+        it 'passes no arguments when none are given' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform!).once.with('restart')
+          described_class.restart!
+        end
+
+        it 'passes no block when one is given' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform!).once.with('restart')
+          described_class.restart! { true }
+        end
+      end
+
+      context 'without bang' do
+        it 'passes the arguments down to the API call' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform).once.with('unregister', check_res_body: false,
+                                                      user: 'tom',
+                                                      host: 'jabber.local')
+          described_class.unregister(user: 'tom@jabber.local')
+        end
+
+        it 'passes no arguments when none are given' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform).once.with('restart')
+          described_class.restart
+        end
+
+        it 'passes no block when one is given' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform).once.with('restart')
+          described_class.restart { true }
+        end
+      end
+    end
+
+    context 'without predefined commands' do
+      context 'with bang' do
+        it 'passes the arguments down to the API call' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform!).once.with('unknown', user: 'Tom')
+          described_class.unknown!(user: 'Tom')
+        end
+
+        it 'passes no arguments when none are given' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform!).once.with('unknown')
+          described_class.unknown!
+        end
+
+        it 'passes no block when one is given' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform!).once.with('unknown')
+          described_class.unknown! { true }
+        end
+      end
+
+      context 'without bang' do
+        it 'passes the arguments down to the API call' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform).once.with('unknown', user: 'Tom')
+          described_class.unknown(user: 'Tom')
+        end
+
+        it 'passes no arguments when none are given' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform).once.with('unknown')
+          described_class.unknown
+        end
+
+        it 'passes no block when one is given' do
+          expect(JabberAdmin::ApiCall).to \
+            receive(:perform).once.with('unknown')
+          described_class.unknown { true }
+        end
       end
     end
   end
 
-  context 'when command is not valid' do
-    it 'throws an error' do
-      expect { described_class.foobar! }.to raise_error(NameError)
+  describe '.predefined_command' do
+    it 'raises a NameError in case the given command is not known' do
+      expect { described_class.predefined_command('unknown') }.to \
+        raise_error(NameError)
+    end
+
+    it 'returns the class constant when the given command is known' do
+      expect(described_class.predefined_command('restart')).to \
+        be(JabberAdmin::Commands::Restart)
+    end
+
+    it 'can deal with bang-versions' do
+      expect(described_class.predefined_command('restart!')).to \
+        be(JabberAdmin::Commands::Restart)
     end
   end
 
-  describe '.configure' do
+  describe '.predefined_callable' do
     before do
-      JabberAdmin.configure do |config|
-        config.api_host = "https://jabber.example.com"
+      allow(JabberAdmin::ApiCall).to receive(:perform)
+      allow(JabberAdmin::ApiCall).to receive(:perform!)
+    end
+
+    it 'builds a working wrapper for a bang version' do
+      expect(JabberAdmin::ApiCall).to receive(:perform!).once
+      described_class.predefined_callable('unknown!').call
+    end
+
+    it 'builds a working wrapper for a non-bang version' do
+      expect(JabberAdmin::ApiCall).to receive(:perform).once
+      described_class.predefined_callable('unknown').call
+    end
+
+    it 'passes down arguments' do
+      args = { user: 'Tom', room: 'Basement' }
+      expect(JabberAdmin::ApiCall).to receive(:perform).once.with(*args)
+      described_class.predefined_callable('unknown').call(*args)
+    end
+  end
+
+  describe '.respond_to?' do
+    context 'with predefined commands' do
+      it 'responds to commands with bang' do
+        expect(described_class.respond_to?(:register!)).to eq(true)
+      end
+
+      it 'responds to commands without bang' do
+        expect(described_class.respond_to?(:register)).to eq(true)
       end
     end
 
-    it 'configures the Gem' do
-      expect(JabberAdmin.configuration.api_host)
-        .to eq("https://jabber.example.com")
-    end
-  end
+    context 'without predefined commands' do
+      it 'responds to commands with bang' do
+        expect(described_class.respond_to?(:unknown!)).to eq(true)
+      end
 
-  describe '.registered_users!' do
-    before do
-      allow(JabberAdmin::Commands::RegisteredUsers)
-        .to receive(:call)
-
-      described_class.registered_users!(host: 'example.com')
-    end
-
-    it 'executes the right command' do
-      expect(JabberAdmin::Commands::RegisteredUsers)
-        .to have_received(:call)
-        .with(host: 'example.com')
+      it 'responds to commands without bang' do
+        expect(described_class.respond_to?(:unknown)).to eq(true)
+      end
     end
   end
 end

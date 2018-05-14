@@ -2,14 +2,16 @@
 
 module JabberAdmin
   module Commands
-    ##
-    # List all registered users in HOST
+    # List all registered users on the ejabberd vhost.
     #
-    # https://docs.ejabberd.im/developer/ejabberd-api/admin-api/#registered-users-list-all-registered-users-in-host
+    # @see https://bit.ly/2KhwT6Z
     class RegisteredUsers
-      # @param [host] The Local vhost
-      def self.call(host:)
-        JabberAdmin::ApiCall.perform 'registered_users', host: host
+      # Pass the correct data to the given callable.
+      #
+      # @param callable [Proc, #call] the callable to call
+      # @param host [String] the jabber vhost (eg. +localhost+)
+      def self.call(callable, host:)
+        callable.call('registered_users', check_res_body: false, host: host)
       end
     end
   end

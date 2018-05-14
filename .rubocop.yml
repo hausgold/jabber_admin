@@ -1,0 +1,33 @@
+require: rubocop-rspec
+
+Rails:
+  Enabled: true
+
+Documentation:
+  Enabled: true
+
+AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: 2.2
+
+Metrics/BlockLength:
+  Exclude:
+    - Rakefile
+    - spec/**/*.rb
+    - '**/*.rake'
+    - '*.gemspec'
+
+# Document all the things.
+Style/DocumentationMethod:
+  Enabled: true
+  RequireForNonPublicMethods: true
+
+# Because +expect_any_instance_of().to have_received()+ is not
+# supported with the +with(hash_including)+ matchers
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+# Allow deeper nesting because of the predefined/non-predefined -
+# bang/non-bang cases.
+RSpec/NestedGroups:
+  Max: 4

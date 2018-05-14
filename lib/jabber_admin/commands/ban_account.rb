@@ -2,17 +2,18 @@
 
 module JabberAdmin
   module Commands
-    ##
-    # Ban an account: kick sessions and set random password
-    # https://docs.ejabberd.im/developer/ejabberd-api/admin-api/#ban-account-ban-an-account-kick-sessions-and-set-random-password
+    # Ban an account by kicking sessions and set random password.
+    #
+    # @see https://bit.ly/2KW9xVt
     class BanAccount
-      # @param [user] The user
-      # @param [host] Server name
-      # @param [reason] Reason for banning user
-      def self.call(user:, host:, reason:)
-        JabberAdmin::ApiCall.perform(
-          'ban_account', user: user, host: host, reason: reason
-        )
+      # Pass the correct data to the given callable.
+      #
+      # @param callable [Proc, #call] the callable to call
+      # @param user [String] user JID wo/ resource (eg. +tom@localhost+)
+      # @param reason [String] the banning reason (eg. +Spamming other users+)
+      def self.call(callable, user:, reason:)
+        uid, host = user.split('@')
+        callable.call('ban_account', user: uid, host: host, reason: reason)
       end
     end
   end

@@ -3,11 +3,13 @@
 /Gemfile.lock
 /_yardoc/
 /coverage/
+/doc/
 /pkg/
 /spec/reports/
 /tmp/
+/vendor/
+/gemfiles/vendor/
+*.gemfile.lock
 
 # rspec failure tracking
 .rspec_status
-
-*.gem
