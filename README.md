@@ -34,7 +34,7 @@ $ bundle
 Or install it yourself as:
 
 ```bash
-$ gem inst.object_idall jabber_admin
+$ gem install jabber_admin
 ```
 
 ## Configuration
