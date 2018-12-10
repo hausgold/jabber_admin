@@ -1,4 +1,4 @@
-![jabber_admin](doc/assets/project.png)
+![jabber_admin](doc/assets/project.svg)
 
 [![Build Status](https://travis-ci.org/hausgold/jabber_admin.svg?branch=master)](https://travis-ci.org/hausgold/jabber_admin)
 [![Gem Version](https://badge.fury.io/rb/jabber_admin.svg)](https://badge.fury.io/rb/jabber_admin)
