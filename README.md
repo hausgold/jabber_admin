@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/hausgold/jabber_admin.svg?branch=master)](https://travis-ci.org/hausgold/jabber_admin)
 [![Gem Version](https://badge.fury.io/rb/jabber_admin.svg)](https://badge.fury.io/rb/jabber_admin)
-[![Maintainability](https://api.codeclimate.com/v1/badges/0b3c444d8db8acaaba97/maintainability)](https://codeclimate.com/github/hausgold/jabber_admin/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/0b3c444d8db8acaaba97/test_coverage)](https://codeclimate.com/github/hausgold/jabber_admin/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/dd51c4668e97771baaba/maintainability)](https://codeclimate.com/repos/5cac8bcb6969c376ed007c70/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/dd51c4668e97771baaba/test_coverage)](https://codeclimate.com/repos/5cac8bcb6969c376ed007c70/test_coverage)
 [![API docs](https://img.shields.io/badge/docs-API-blue.svg)](https://www.rubydoc.info/gems/jabber_admin)
 
 jabber_admin is a small library to easily communicate with the [ejabberd
