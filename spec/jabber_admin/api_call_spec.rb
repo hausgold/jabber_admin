@@ -150,7 +150,7 @@ RSpec.describe JabberAdmin::ApiCall do
 
     it 'calls the response method' do
       expect(instance).to \
-        receive(:response).and_return(fake_response).at_least(2).times
+        receive(:response).and_return(fake_response).at_least(:twice)
       instance.perform!
     end
   end

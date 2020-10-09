@@ -1,0 +1,183 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://jabber.local/api/get_vcard
+    body:
+      encoding: UTF-8
+      string: '{"user":"admin","host":"jabber.local","name":"FN"}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.1p83
+      Content-Length:
+      - '50'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber.local
+      Authorization:
+      - Basic YWRtaW5AamFiYmVyLmxvY2FsOmRlZmF1bHRwdw==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '23'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '{"content":"The Admin"}'
+  recorded_at: Mon, 12 Oct 2020 17:24:42 GMT
+- request:
+    method: post
+    uri: http://jabber.local/api/get_vcard2
+    body:
+      encoding: UTF-8
+      string: '{"user":"admin","host":"jabber.local","name":"N","subname":"GIVEN"}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.1p83
+      Content-Length:
+      - '67'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber.local
+      Authorization:
+      - Basic YWRtaW5AamFiYmVyLmxvY2FsOmRlZmF1bHRwdw==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '18'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '{"content":"Aang"}'
+  recorded_at: Mon, 12 Oct 2020 17:24:42 GMT
+- request:
+    method: post
+    uri: http://jabber.local/api/get_vcard2_multi
+    body:
+      encoding: UTF-8
+      string: '{"user":"admin","host":"jabber.local","name":"ORG","subname":"ORGUNIT"}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.1p83
+      Content-Length:
+      - '71'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber.local
+      Authorization:
+      - Basic YWRtaW5AamFiYmVyLmxvY2FsOmRlZmF1bHRwdw==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '13'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '["Marketing","Production"]'
+  recorded_at: Mon, 12 Oct 2020 17:24:42 GMT
+- request:
+    method: post
+    uri: http://jabber.local/api/get_vcard2
+    body:
+      encoding: UTF-8
+      string: '{"user":"admin","host":"jabber.local","name":"UN","subname":"KNOWN_SINGLE"}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.1p83
+      Content-Length:
+      - '75'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber.local
+      Authorization:
+      - Basic YWRtaW5AamFiYmVyLmxvY2FsOmRlZmF1bHRwdw==
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '"error_no_value_found_in_vcard"'
+  recorded_at: Mon, 12 Oct 2020 17:24:42 GMT
+- request:
+    method: post
+    uri: http://jabber.local/api/get_vcard2_multi
+    body:
+      encoding: UTF-8
+      string: '{"user":"admin","host":"jabber.local","name":"UN","subname":"KNOWN_ARRAY"}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.1p83
+      Content-Length:
+      - '74'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber.local
+      Authorization:
+      - Basic YWRtaW5AamFiYmVyLmxvY2FsOmRlZmF1bHRwdw==
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '"error_no_value_found_in_vcard"'
+  recorded_at: Mon, 12 Oct 2020 17:24:42 GMT
+recorded_with: VCR 6.0.0

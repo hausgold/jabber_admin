@@ -27,12 +27,14 @@ SORT ?= sort
 # Container binaries
 BUNDLE ?= bundle
 RAKE ?= rake
+RUBOCOP ?= rubocop
 
 all:
 	# jabber_admin
 	#
 	# install                  Install the dependencies
 	# test                     Run the whole test suite
+	# test-style               Check the coding styles
 	# clean                    Clean the dependencies
 	#
 	# shell                    Run an interactive shell on the container
@@ -63,6 +65,12 @@ install:
 test: install
 	# Run the whole test suite
 	@$(call run-shell,$(BUNDLE) exec $(RAKE))
+
+test-style: test-style-ruby
+
+test-style-ruby:
+	# Run the static code analyzer (rubocop)
+	@$(call run-shell,$(BUNDLE) exec $(RUBOCOP) -a)
 
 clean:
 	# Clean the dependencies

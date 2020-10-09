@@ -1,14 +1,11 @@
 require: rubocop-rspec
 
-Rails:
-  Enabled: true
-
 Documentation:
   Enabled: true
 
 AllCops:
   DisplayCopNames: true
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.5
 
 Metrics/BlockLength:
   Exclude:
@@ -31,3 +28,8 @@ RSpec/MessageSpies:
 # bang/non-bang cases.
 RSpec/NestedGroups:
   Max: 4
+
+# We stay at 80 characters per line.
+# See: https://rubystyle.guide/#max-line-length
+Metrics/LineLength:
+  Max: 80

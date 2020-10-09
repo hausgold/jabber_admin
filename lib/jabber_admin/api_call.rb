@@ -41,8 +41,8 @@ module JabberAdmin
         password: JabberAdmin.configuration.password,
         payload: payload.to_json
       )
-    rescue RestClient::Exception => err
-      @response = err.response
+    rescue RestClient::Exception => e
+      @response = e.response
     end
 
     # Check if the response was successful. Otherwise raise exceptions with
@@ -52,22 +52,25 @@ module JabberAdmin
     # @raise JabberAdmin::CommandError
     #
     # rubocop:disable Metrics/AbcSize because its the bundled check logic
+    # rubocop:disable Metrics/MethodLength dito
     def check_response
       # The REST API responds a 404 status code when the command is not known.
-      raise UnknownCommandError, "Command '#{command}' is not known", response \
-        if response.code == 404
+      if response.code == 404
+        raise UnknownCommandError.new("Command '#{command}' is not known",
+                                      response)
+      end
 
       # In case we send commands with missing data or any other validation
       # issues, the REST API will respond with a 400 Bad Request status
       # code.
-      raise CommandError, 'Invalid arguments for command', response \
+      raise CommandError.new('Invalid arguments for command', response) \
         if response.code == 400
 
       # Looks like the ejabberd REST API is returning 200 OK in case the
       # request was valid and permitted. But it does not indicate that the
       # request was successful handled. This is indicated on the response body
       # as a one (1) or a zero (0). (0 on success, 1 otherwise)
-      raise RequestError, 'Response code was not 200', response \
+      raise RequestError.new('Response code was not 200', response) \
         unless response.code == 200
 
       # Stop the check, when we should not check the response body
@@ -76,10 +79,11 @@ module JabberAdmin
       # The command was not successful, for some reason. Unfortunately we do
       # not get any further information here, which makes error debugging a
       # struggle.
-      raise CommandError, 'Command was not successful', response \
+      raise CommandError.new('Command was not successful', response) \
         unless response.body == '0'
     end
     # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     # Just a simple DSL wrapper for the response method.
     #

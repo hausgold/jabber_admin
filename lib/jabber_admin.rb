@@ -84,14 +84,11 @@ module JabberAdmin
   # @param method [Symbol, String, #to_s] the name of the command to run
   # @param args all additional payload to pass down to the API call
   # @return [RestClient::Response] the actual response of the command
-  #
-  # rubocop:disable Style/MethodMissing we support all given methods
   def self.method_missing(method, *args)
     predefined_command(method).call(predefined_callable(method), *args)
   rescue NameError
     predefined_callable(method).call(method.to_s.chomp('!'), *args)
   end
-  # rubocop:enable Style/MethodMissing
 
   # Try to find the given name as a predefined command. When there is no such
   # predefined command, we raise a +NameError+.

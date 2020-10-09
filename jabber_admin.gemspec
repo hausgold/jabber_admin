@@ -25,6 +25,8 @@ Gem::Specification.new do |spec|
       'public gem pushes.'
   end
 
+  spec.required_ruby_version = '~> 2.5'
+
   spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
@@ -32,17 +34,16 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'activesupport', '>= 4.2.5'
+  spec.add_dependency 'activesupport', '>= 5.2.0'
   spec.add_dependency 'rest-client', '~> 2.0', '>= 2.0.2'
 
-  spec.required_ruby_version = '>= 2.2'
-
   spec.add_development_dependency 'bundler', '>= 1.16', '< 3'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'rubocop-rspec'
-  spec.add_development_dependency 'simplecov', '~> 0.15'
-  spec.add_development_dependency 'vcr', '~> 3.0'
+  spec.add_development_dependency 'irb', '~> 1.2'
+  spec.add_development_dependency 'rake', '~> 13.0'
+  spec.add_development_dependency 'rspec', '~> 3.9'
+  spec.add_development_dependency 'rubocop', '~> 0.93'
+  spec.add_development_dependency 'rubocop-rspec', '~> 1.43'
+  spec.add_development_dependency 'simplecov', '< 0.18'
+  spec.add_development_dependency 'vcr', '~> 6.0'
   spec.add_development_dependency 'webmock', '~> 3.0'
 end
