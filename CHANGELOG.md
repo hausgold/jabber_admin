@@ -1,4 +1,4 @@
-### next
+### 1.0.0
 
 * All `JabberAdmin` errors `[UnknownCommandError, CommandError, RequestError]`
   now ship the response object correctly (was always set to `nil` previously)
@@ -7,6 +7,7 @@
 * Added support for setting/fetching vCard details (`JabberAdmin.set_vcard`,
   `JabberAdmin.get_vcard`) (#6)
 * Dropped support for Ruby <2.5 (#6)
+* Added some versioning helpers (eg. `JabberAdmin.version`)
 
 ### 0.2.0
 
