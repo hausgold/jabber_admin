@@ -1,3 +1,7 @@
+### next
+
+* Gracefully handle a missing vCard when a vCard field is queried (#7)
+
 ### 1.0.0
 
 * All `JabberAdmin` errors `[UnknownCommandError, CommandError, RequestError]`

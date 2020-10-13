@@ -24,6 +24,12 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
         it 'returns the expected scalar value' do
           expect(action.call).to be_eql('The Admin')
         end
+
+        context 'when there is no vCard' do
+          it 'returns nil' do
+            expect(action.call).to be(nil)
+          end
+        end
       end
     end
   end
