@@ -53,15 +53,15 @@ module JabberAdmin
             end
           end
 
-          res = JSON.parse(callable.call(meth, check_res_body: false,
-                                               user: uid,
-                                               host: host,
-                                               **args).body)
-
-          res.is_a?(Hash) ? res['content'] : res
-        rescue JabberAdmin::CommandError => e
+          res = callable.call(meth, check_res_body: false,
+                                    user: uid, host: host, **args)
+          body = (200..299).cover?(res.code) ? JSON.parse(res.body) : nil
+          body.is_a?(Hash) ? body['content'] : body
+        rescue JabberAdmin::Error => e
           # When ejabberd tells us there was no value, it does this the hard way
           next if e.response.body.include? 'error_no_value_found_in_vcard'
+          # Same for the case when there is no vCard at all
+          next if e.response.body.include? 'error_no_vcard_found'
 
           raise e
         end

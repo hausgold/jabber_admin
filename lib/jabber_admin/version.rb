@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# The gem module.
 module JabberAdmin
   # The version constant of the gem. Increase this value
   # in case of a gem release.
