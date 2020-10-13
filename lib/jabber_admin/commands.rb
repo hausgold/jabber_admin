@@ -6,6 +6,6 @@ module JabberAdmin
 end
 
 # Require all commands from the commands subfolder
-Dir[Pathname.new(__dir__).join('commands', '**', '*.rb')].each do |file|
+Dir[Pathname.new(__dir__).join('commands', '**', '*.rb')].sort.each do |file|
   require file
 end

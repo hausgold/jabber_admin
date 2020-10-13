@@ -1,0 +1,111 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://jabber.local/api/set_vcard
+    body:
+      encoding: UTF-8
+      string: '{"user":"admin","host":"jabber.local","name":"FN","content":"The Admin"}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.1p83
+      Content-Length:
+      - '72'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber.local
+      Authorization:
+      - Basic YWRtaW5AamFiYmVyLmxvY2FsOmRlZmF1bHRwdw==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '0'
+  recorded_at: Mon, 12 Oct 2020 16:43:25 GMT
+- request:
+    method: post
+    uri: http://jabber.local/api/set_vcard2
+    body:
+      encoding: UTF-8
+      string: '{"user":"admin","host":"jabber.local","name":"N","content":"Aang","subname":"GIVEN"}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.1p83
+      Content-Length:
+      - '84'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber.local
+      Authorization:
+      - Basic YWRtaW5AamFiYmVyLmxvY2FsOmRlZmF1bHRwdw==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '0'
+  recorded_at: Mon, 12 Oct 2020 16:43:25 GMT
+- request:
+    method: post
+    uri: http://jabber.local/api/set_vcard2_multi
+    body:
+      encoding: UTF-8
+      string: '{"user":"admin","host":"jabber.local","name":"ORG","subname":"ORGUNIT","contents":["Marketing","Production"]}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.7.1p83
+      Content-Length:
+      - '109'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber.local
+      Authorization:
+      - Basic YWRtaW5AamFiYmVyLmxvY2FsOmRlZmF1bHRwdw==
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '0'
+  recorded_at: Mon, 12 Oct 2020 16:43:25 GMT
+recorded_with: VCR 6.0.0

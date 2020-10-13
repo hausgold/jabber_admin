@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+$VERBOSE = nil
 require 'simplecov'
 SimpleCov.command_name 'specs'
 
@@ -18,7 +19,9 @@ require 'jabber_admin'
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
-Dir[Pathname.new(__dir__).join('support', '**', '*.rb')].each { |f| require f }
+Dir[Pathname.new(__dir__).join('support', '**', '*.rb')].sort.each do |f|
+  require f
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -27,16 +30,15 @@ RSpec.configure do |config|
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
 
+  # Enable the focus inclusion filter and run all when no filter is set
+  # See: http://bit.ly/2TVkcIh
+  config.filter_run(focus: true)
+  config.run_all_when_everything_filtered = true
+
   config.expect_with :rspec do |conf|
     conf.syntax = :expect
   end
 
-  config.before do
-    # Reset JabberAdmin configuration
-    JabberAdmin.configure do |jabber_conf|
-      jabber_conf.url = 'http://jabber/api'
-      jabber_conf.username = 'admin@ejabberd.local'
-      jabber_conf.password = 'defaultpw'
-    end
-  end
+  # Reset the gem configuration to its testing defaults before each example
+  config.before { reset_configuration! }
 end
