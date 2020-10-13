@@ -1,4 +1,4 @@
-### next
+### 1.0.1
 
 * Gracefully handle a missing vCard when a vCard field is queried (#7)
 
