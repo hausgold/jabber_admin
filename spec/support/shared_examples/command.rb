@@ -36,7 +36,7 @@ shared_examples 'a command' do |with_name:, with_called_name: nil,
   if with_input_args.empty?
     it 'passes no further arguments to the callable' do
       callable = proc do |_command, payload = {}|
-        expect(payload).to be_eql({})
+        expect(payload).to be_empty
         res
       end
       expect(callable).to receive(:call).once.and_call_original
