@@ -1,3 +1,8 @@
+### 1.0.2
+
+* Corrected the GNU Make release target
+* Corrected the empty arguments check
+
 ### 1.0.1
 
 * Gracefully handle a missing vCard when a vCard field is queried (#7)
