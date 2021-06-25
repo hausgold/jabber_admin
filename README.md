@@ -1,6 +1,6 @@
 ![jabber_admin](doc/assets/project.svg)
 
-[![Build Status](https://travis-ci.com/hausgold/jabber_admin.svg?branch=master)](https://travis-ci.com/hausgold/jabber_admin)
+[![Continuous Integration](https://github.com/hausgold/jabber_admin/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/hausgold/jabber_admin/actions/workflows/test.yml)
 [![Gem Version](https://badge.fury.io/rb/jabber_admin.svg)](https://badge.fury.io/rb/jabber_admin)
 [![Maintainability](https://api.codeclimate.com/v1/badges/dd51c4668e97771baaba/maintainability)](https://codeclimate.com/repos/5cac8bcb6969c376ed007c70/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/dd51c4668e97771baaba/test_coverage)](https://codeclimate.com/repos/5cac8bcb6969c376ed007c70/test_coverage)
