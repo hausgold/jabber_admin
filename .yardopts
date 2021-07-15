@@ -1,4 +1,6 @@
---output-dir=doc/app
+--output-dir=doc/api
+--plugin activesupport-concern
+--markup=rdoc
 -
 README.md
 lib/**/*.rb

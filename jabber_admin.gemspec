@@ -39,6 +39,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '>= 1.16', '< 3'
   spec.add_development_dependency 'irb', '~> 1.2'
+  spec.add_development_dependency 'railties', '>= 4.2.0', '< 6.1'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.9'
   spec.add_development_dependency 'rubocop', '~> 0.93'
@@ -46,4 +47,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov', '< 0.18'
   spec.add_development_dependency 'vcr', '~> 6.0'
   spec.add_development_dependency 'webmock', '~> 3.0'
+  spec.add_development_dependency 'yard', '~> 0.9.18'
+  spec.add_development_dependency 'yard-activesupport-concern', '~> 0.0.1'
 end

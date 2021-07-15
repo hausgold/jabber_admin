@@ -32,13 +32,18 @@ RUBOCOP ?= rubocop
 all:
 	# jabber_admin
 	#
-	# install                  Install the dependencies
-	# test                     Run the whole test suite
-	# test-style               Check the coding styles
-	# clean                    Clean the dependencies
+	# install            Install the dependencies
+	# test               Run the whole test suite
+	# test-style         Check the coding styles
+	# clean              Clean the dependencies
 	#
-	# shell                    Run an interactive shell on the container
-	# shell-irb                Run an interactive IRB shell on the container
+	# docs               Generate the Ruby documentation of the library
+	# stats              Print the code statistics (library and test suite)
+	# notes              Print all the notes from the code
+	# release            Release a new Gem version (maintainers only)
+	#
+	# shell              Run an interactive shell on the container
+	# shell-irb          Run an interactive IRB shell on the container
 	#
 	# supported-commands-list  Generate the supported commands list
 
@@ -62,9 +67,13 @@ install:
 	@$(MKDIR) -p $(VENDOR_DIR)
 	@$(call run-shell,$(BUNDLE) check || $(BUNDLE) install --path $(VENDOR_DIR))
 
-test: install
+test: \
+	test-specs \
+	test-style
+
+test-specs:
 	# Run the whole test suite
-	@$(call run-shell,$(BUNDLE) exec $(RAKE))
+	@$(call run-shell,$(BUNDLE) exec $(RAKE) stats spec)
 
 test-style: test-style-ruby
 
@@ -84,13 +93,26 @@ endif
 
 distclean: clean clean-containers
 
-shell: install
+shell:
 	# Run an interactive shell on the container
 	@$(call run-shell,$(BASH) -i)
 
-shell-irb: install
+shell-irb:
 	# Run an interactive IRB shell on the container
 	@$(call run-shell,bin/console)
+
+docs:
+	# Build the API documentation
+	@$(call run-shell,$(BUNDLE) exec $(YARD) -q && \
+		$(BUNDLE) exec $(YARD) stats --list-undoc --compact)
+
+notes:
+	# Print the code statistics (library and test suite)
+	@$(call run-shell,$(BUNDLE) exec $(RAKE) notes)
+
+stats:
+	# Print all the notes from the code
+	@$(call run-shell,$(BUNDLE) exec $(RAKE) stats)
 
 release:
 	# Release a new gem version

@@ -2,9 +2,9 @@
 
 [![Continuous Integration](https://github.com/hausgold/jabber_admin/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/hausgold/jabber_admin/actions/workflows/test.yml)
 [![Gem Version](https://badge.fury.io/rb/jabber_admin.svg)](https://badge.fury.io/rb/jabber_admin)
-[![Maintainability](https://api.codeclimate.com/v1/badges/dd51c4668e97771baaba/maintainability)](https://codeclimate.com/repos/5cac8bcb6969c376ed007c70/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/dd51c4668e97771baaba/test_coverage)](https://codeclimate.com/repos/5cac8bcb6969c376ed007c70/test_coverage)
-[![API docs](https://img.shields.io/badge/docs-API-blue.svg)](https://www.rubydoc.info/gems/jabber_admin)
+[![Test Coverage](https://automate-api.hausgold.de/v1/coverage_reports/jabber_admin/coverage.svg)](https://knowledge.hausgold.de/coverage)
+[![Test Ratio](https://automate-api.hausgold.de/v1/coverage_reports/jabber_admin/ratio.svg)](https://knowledge.hausgold.de/coverage)
+[![API docs](https://automate-api.hausgold.de/v1/coverage_reports/jabber_admin/documentation.svg)](https://www.rubydoc.info/gems/jabber_admin)
 
 jabber_admin is a small library to easily communicate with the [ejabberd
 admin API](https://docs.ejabberd.im/developer/ejabberd-api/admin-api).
