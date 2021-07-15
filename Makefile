@@ -28,6 +28,7 @@ SORT ?= sort
 BUNDLE ?= bundle
 RAKE ?= rake
 RUBOCOP ?= rubocop
+YARD ?= yard
 
 all:
 	# jabber_admin
