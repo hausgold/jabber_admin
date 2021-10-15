@@ -4,7 +4,7 @@
 module JabberAdmin
   # The version constant of the gem. Increase this value
   # in case of a gem release.
-  VERSION = '1.0.2'
+  VERSION = '1.0.3'
 
   class << self
     # Returns the version of gem as a string.
