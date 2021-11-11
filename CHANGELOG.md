@@ -1,3 +1,7 @@
+### 1.0.4
+
+* Added support for the predefined command `destroy_room`
+
 ### 1.0.3
 
 * Migrated to Github Actions
