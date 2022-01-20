@@ -165,6 +165,27 @@ RSpec.describe JabberAdmin do
     end
   end
 
+  describe '.room_exist?', :vcr do
+    let(:room) { 'room1@conference.ejabberd.local' }
+    let(:host) { room.split('@').last }
+
+    context 'with an existing room' do
+      before { described_class.create_room(room: room, host: host) }
+
+      it 'returns true' do
+        expect(described_class.room_exist?(room)). to eq(true)
+      end
+    end
+
+    context 'without an existing room' do
+      let(:room) { 'no-room@conference.ejabberd.local' }
+
+      it 'returns false' do
+        expect(described_class.room_exist?(room)). to eq(false)
+      end
+    end
+  end
+
   describe '.respond_to?' do
     context 'with predefined commands' do
       it 'responds to commands with bang' do
