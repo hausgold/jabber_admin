@@ -1,0 +1,75 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://jabber/api/create_room
+    body:
+      encoding: UTF-8
+      string: '{"name":"room2","service":"conference.ejabberd.local","host":"conference.ejabberd.local"}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.5.9p229
+      Content-Length:
+      - '89'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber
+      Authorization:
+      - Basic YWRtaW5AZWphYmJlcmQubG9jYWw6ZGVmYXVsdHB3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '1'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: '0'
+  recorded_at: Thu, 20 Jan 2022 13:20:27 GMT
+- request:
+    method: post
+    uri: http://jabber/api/get_room_affiliations
+    body:
+      encoding: UTF-8
+      string: '{"name":"room2","service":"conference.ejabberd.local"}'
+    headers:
+      Accept:
+      - "*/*"
+      User-Agent:
+      - rest-client/2.1.0 (linux-gnu x86_64) ruby/2.5.9p229
+      Content-Length:
+      - '54'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Host:
+      - jabber
+      Authorization:
+      - Basic YWRtaW5AZWphYmJlcmQubG9jYWw6ZGVmYXVsdHB3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '2'
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, X-Admin
+    body:
+      encoding: UTF-8
+      string: "[]"
+  recorded_at: Thu, 20 Jan 2022 13:20:27 GMT
+recorded_with: VCR 6.0.0

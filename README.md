@@ -115,6 +115,7 @@ Here comes a list of all supported predefined commands:
 - [unregister](https://bit.ly/2wwYnDE)
 - [unsubscribe_room](https://bit.ly/2G5zcrj)
 - [destroy_room](https://bit.ly/31CtqxB)
+- [get_room_affiliations](https://bit.ly/3qI9Nyq)
 
 If you want to contribute more, we accept pull requests!
 

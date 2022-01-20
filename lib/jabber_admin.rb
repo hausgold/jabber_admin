@@ -112,6 +112,21 @@ module JabberAdmin
     proc { |*args| ApiCall.send(method, *args) }
   end
 
+  # Determine if a room exists. This is a convenience method for the
+  # +JabberAdmin::Commands::GetRoomAffiliations+ command, which can be used
+  # to reliably determine whether a room exists or not.
+  #
+  # @param room [String] the name of the room to check
+  # @return [Boolean] whether the room exists or not
+  def self.room_exist?(room)
+    get_room_affiliations!(room: room)
+    true
+  rescue JabberAdmin::CommandError => e
+    raise e unless /room does not exist/.match? e.response.body
+
+    false
+  end
+
   # We support all methods if you ask for. This is our dynamic command approach
   # here to support predefined and custom commands in the same namespace.
   #
