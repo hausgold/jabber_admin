@@ -1,3 +1,9 @@
+### 1.0.5
+
+* Added support for the predefined command `get_room_affiliations` (#10)
+* Added the top-level helper `JabberAdmin.room_exist?` to determine whether
+  a room exists or not (#10)
+
 ### 1.0.4
 
 * Added support for the predefined command `destroy_room`
