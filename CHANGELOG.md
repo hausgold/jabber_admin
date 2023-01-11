@@ -1,3 +1,11 @@
+### next
+
+* Bundler >= 2.3 is from now on required as minimal version (#11)
+* Dropped support for Ruby < 2.5 (#11)
+* Dropped support for Rails < 5.2 (#11)
+* Updated all development/runtime gems to their latest
+  Ruby 2.5 compatible version (#11)
+
 ### 1.0.5
 
 * Added support for the predefined command `get_room_affiliations` (#10)

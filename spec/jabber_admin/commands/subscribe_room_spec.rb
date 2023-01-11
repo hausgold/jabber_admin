@@ -20,6 +20,6 @@ RSpec.describe JabberAdmin::Commands::SubscribeRoom do
                     nick: 'TomTom',
                     room: 'room1@conference.ejabberd.local',
                     nodes: 'urn:xmpp:mucsub:nodes:messages,' \
-                      'urn:xmpp:mucsub:nodes:affiliations'
+                           'urn:xmpp:mucsub:nodes:affiliations'
                   ]
 end

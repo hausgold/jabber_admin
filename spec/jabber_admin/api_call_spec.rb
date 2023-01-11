@@ -4,7 +4,9 @@ require 'spec_helper'
 
 RSpec.describe JabberAdmin::ApiCall do
   let(:instance) { described_class.new('restart') }
-  let(:fake_response) { OpenStruct.new(code: 200, body: '0') }
+  let(:fake_response) do
+    instance_double(RestClient::Response, code: 200, body: '0')
+  end
 
   describe '#new' do
     let(:instance) { described_class.new('command', test: true, a: 'b') }

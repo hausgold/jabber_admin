@@ -1,11 +1,25 @@
-require: rubocop-rspec
+require:
+  - rubocop-rspec
+  - rubocop-rails
 
-Documentation:
+Rails:
+  Enabled: true
+
+Style/Documentation:
   Enabled: true
 
 AllCops:
+  NewCops: enable
+  SuggestExtensions: false
   DisplayCopNames: true
   TargetRubyVersion: 2.5
+  TargetRailsVersion: 5.2
+  Exclude:
+    - bin/**/*
+    - vendor/**/*
+    - config/**/*
+    - build/**/*
+    - gemfiles/**/*
 
 Metrics/BlockLength:
   Exclude:
@@ -13,6 +27,10 @@ Metrics/BlockLength:
     - spec/**/*.rb
     - '**/*.rake'
     - '*.gemspec'
+
+# MFA is not yet enabled for our gems yet.
+Gemspec/RequireMFA:
+  Enabled: false
 
 # Document all the things.
 Style/DocumentationMethod:
@@ -31,5 +49,5 @@ RSpec/NestedGroups:
 
 # We stay at 80 characters per line.
 # See: https://rubystyle.guide/#max-line-length
-Metrics/LineLength:
+Layout/LineLength:
   Max: 80
