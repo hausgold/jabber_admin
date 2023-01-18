@@ -6,7 +6,8 @@ services:
     ports: ["4560", "5222", "5269", "5280", "5443"]
 
   test:
-    image: ruby:2.5
+    build: .
+    env_file: Envfile
     network_mode: bridge
     working_dir: /app
     volumes:

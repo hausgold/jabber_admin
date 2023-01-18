@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-# The gem module.
+# The gem version details.
 module JabberAdmin
-  # The version constant of the gem. Increase this value
-  # in case of a gem release.
+  # The version of the +jabber_admin+ gem
   VERSION = '1.0.5'
 
   class << self

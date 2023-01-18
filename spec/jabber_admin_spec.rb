@@ -173,7 +173,7 @@ RSpec.describe JabberAdmin do
       before { described_class.create_room(room: room, host: host) }
 
       it 'returns true' do
-        expect(described_class.room_exist?(room)). to eq(true)
+        expect(described_class.room_exist?(room)).to be(true)
       end
     end
 
@@ -181,7 +181,7 @@ RSpec.describe JabberAdmin do
       let(:room) { 'no-room@conference.ejabberd.local' }
 
       it 'returns false' do
-        expect(described_class.room_exist?(room)). to eq(false)
+        expect(described_class.room_exist?(room)).to be(false)
       end
     end
   end
@@ -189,21 +189,21 @@ RSpec.describe JabberAdmin do
   describe '.respond_to?' do
     context 'with predefined commands' do
       it 'responds to commands with bang' do
-        expect(described_class.respond_to?(:register!)).to eq(true)
+        expect(described_class.respond_to?(:register!)).to be(true)
       end
 
       it 'responds to commands without bang' do
-        expect(described_class.respond_to?(:register)).to eq(true)
+        expect(described_class.respond_to?(:register)).to be(true)
       end
     end
 
     context 'without predefined commands' do
       it 'responds to commands with bang' do
-        expect(described_class.respond_to?(:unknown!)).to eq(true)
+        expect(described_class.respond_to?(:unknown!)).to be(true)
       end
 
       it 'responds to commands without bang' do
-        expect(described_class.respond_to?(:unknown)).to eq(true)
+        expect(described_class.respond_to?(:unknown)).to be(true)
       end
     end
   end

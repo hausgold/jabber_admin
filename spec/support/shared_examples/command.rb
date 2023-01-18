@@ -46,7 +46,7 @@ shared_examples 'a command' do |with_name:, with_called_name: nil,
 
   (with_called_args.first || []).each do |key, value|
     it "passes the '#{key}' symbol to the callable" do
-      hash = Hash[key, value]
+      hash = { key => value }
       callable = proc do |_command, payload = {}|
         expect(payload).to match(a_hash_including(hash))
         res

@@ -11,7 +11,7 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
       with_name: 'get_vcard',
       with_input_args: [
         :fn,
-        user: 'admin@jabber.local'
+        { user: 'admin@jabber.local' }
       ],
       with_called_args: [
         user: 'admin',
@@ -27,7 +27,7 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
 
         context 'when there is no vCard' do
           it 'returns nil' do
-            expect(action.call).to be(nil)
+            expect(action.call).to be_nil
           end
         end
       end
@@ -41,7 +41,7 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
       with_called_name: 'get_vcard2',
       with_input_args: [
         'n.given',
-        user: 'admin@jabber.local'
+        { user: 'admin@jabber.local' }
       ],
       with_called_args: [
         user: 'admin',
@@ -66,7 +66,7 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
       with_called_name: 'get_vcard2_multi',
       with_input_args: [
         'org.orgunit[]',
-        user: 'admin@jabber.local'
+        { user: 'admin@jabber.local' }
       ],
       with_called_args: [
         user: 'admin',

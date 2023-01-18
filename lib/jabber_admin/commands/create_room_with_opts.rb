@@ -15,7 +15,7 @@ module JabberAdmin
       def self.call(callable, room:, host:, **options)
         name, service = room.split('@')
         options = options.map do |key, value|
-          Hash['name', key.to_s, 'value', value.to_s]
+          { 'name' => key.to_s, 'value' => value.to_s }
         end
 
         callable.call('create_room_with_opts',
