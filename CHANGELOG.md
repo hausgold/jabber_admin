@@ -1,4 +1,4 @@
-### next
+### 1.1.0
 
 * Bundler >= 2.3 is from now on required as minimal version (#11)
 * Dropped support for Ruby < 2.5 (#11)
