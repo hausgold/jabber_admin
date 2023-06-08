@@ -13,6 +13,7 @@ BASH_RUN_SHELL_FLAGS ?=
 
 # Directories
 VENDOR_DIR ?= vendor/bundle
+GEMFILES_DIR ?= gemfiles
 
 # Host binaries
 AWK ?= awk
