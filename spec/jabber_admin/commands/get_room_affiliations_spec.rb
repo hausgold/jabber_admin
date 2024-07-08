@@ -47,7 +47,7 @@ RSpec.describe JabberAdmin::Commands::GetRoomAffiliations do
                       ]
 
       it 'returns empty room affiliations' do
-        expect(action).to be_eql([])
+        expect(action).to eql([])
       end
     end
   end

@@ -70,10 +70,10 @@ module JabberAdmin
         return val[keys.first] if keys.count == 1
 
         # When multiple keys are requested, we assemble a hash
-        keys.map do |key|
+        keys.to_h do |key|
           res_key = key.is_a?(String) ? key.delete_suffix('[]') : key
           [res_key, val[key]]
-        end.to_h
+        end
       end
       # rubocop:enable Metrics/MethodLength
       # rubocop:enable Metrics/AbcSize
