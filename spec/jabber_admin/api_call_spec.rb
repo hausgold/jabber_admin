@@ -57,7 +57,9 @@ RSpec.describe JabberAdmin::ApiCall do
     context 'with mock configuration' do
       before do
         allow(JabberAdmin.configuration).to \
-          receive_messages(username: 'username', password: 'password', url: 'http://test/api/')
+          receive_messages(username: 'username',
+                           password: 'password',
+                           url: 'http://test/api/')
       end
 
       it 'sends the payload as a JSON string' do
