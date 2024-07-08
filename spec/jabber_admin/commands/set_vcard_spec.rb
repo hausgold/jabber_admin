@@ -55,7 +55,7 @@ RSpec.describe JabberAdmin::Commands::SetVcard do
   end
 
   describe 'mixed, multiple fields, mixed' do
-    describe 'integration test', vcr: true do
+    describe 'integration test', :vcr do
       let(:action) do
         JabberAdmin.set_vcard!(
           user: 'admin@jabber.local',

@@ -26,7 +26,7 @@ shared_examples 'a command' do |with_name:, with_called_name: nil,
   # rubocop:disable RSpec/ExampleLength because of the test abstraction
   it "passes '#{with_called_name}' as command name to the callable" do
     callable = proc do |command, _payload = {}|
-      expect(command).to be_eql(with_called_name)
+      expect(command).to eql(with_called_name)
       res
     end
     expect(callable).to receive(:call).once.and_call_original
@@ -57,7 +57,7 @@ shared_examples 'a command' do |with_name:, with_called_name: nil,
   end
   # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
 
-  describe 'integration test', vcr: true do
+  describe 'integration test', :vcr do
     it 'raises no errors' do
       expect { JabberAdmin.send("#{with_name}!", *with_input_args) }.not_to \
         raise_error

@@ -12,11 +12,11 @@ RSpec.describe JabberAdmin::ApiCall do
     let(:instance) { described_class.new('command', test: true, a: 'b') }
 
     it 'saves the given command' do
-      expect(instance.command).to be_eql('command')
+      expect(instance.command).to eql('command')
     end
 
     it 'saves the given payload' do
-      expect(instance.payload).to be_eql(test: true, a: 'b')
+      expect(instance.payload).to eql(test: true, a: 'b')
     end
   end
 
@@ -25,25 +25,25 @@ RSpec.describe JabberAdmin::ApiCall do
       allow(JabberAdmin.configuration).to \
         receive(:url).and_return("\n http://with.trailling.slash/api/  \n")
       expect(instance.url).to \
-        be_eql('http://with.trailling.slash/api/restart')
+        eql('http://with.trailling.slash/api/restart')
     end
 
     it 'produces the correct URL with trailling slash' do
       allow(JabberAdmin.configuration).to \
         receive(:url).and_return('http://with.trailling.slash/api/')
       expect(instance.url).to \
-        be_eql('http://with.trailling.slash/api/restart')
+        eql('http://with.trailling.slash/api/restart')
     end
 
     it 'produces the correct URL without trailling slash' do
       allow(JabberAdmin.configuration).to \
         receive(:url).and_return('http://without.trailling.slash/api')
       expect(instance.url).to \
-        be_eql('http://without.trailling.slash/api/restart')
+        eql('http://without.trailling.slash/api/restart')
     end
   end
 
-  describe '#response', vcr: true do
+  describe '#response', :vcr do
     it 'returns a RestClient::Response instance' do
       expect(instance.response).to be_a(RestClient::Response)
     end
@@ -57,11 +57,7 @@ RSpec.describe JabberAdmin::ApiCall do
     context 'with mock configuration' do
       before do
         allow(JabberAdmin.configuration).to \
-          receive(:username).and_return('username')
-        allow(JabberAdmin.configuration).to \
-          receive(:password).and_return('password')
-        allow(JabberAdmin.configuration).to \
-          receive(:url).and_return('http://test/api/')
+          receive_messages(username: 'username', password: 'password', url: 'http://test/api/')
       end
 
       it 'sends the payload as a JSON string' do
@@ -102,7 +98,7 @@ RSpec.describe JabberAdmin::ApiCall do
     end
   end
 
-  describe '#check_response', vcr: true do
+  describe '#check_response', :vcr do
     let(:destroy_room) do
       described_class.new(
         'destroy_room', name: 'test', service: 'conference.ejabberd.local'

@@ -20,9 +20,9 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
       ],
       stubbed_response: '{"content":"The Admin"}'
     ) do
-      describe 'return value', vcr: true do
+      describe 'return value', :vcr do
         it 'returns the expected scalar value' do
-          expect(action.call).to be_eql('The Admin')
+          expect(action.call).to eql('The Admin')
         end
 
         context 'when there is no vCard' do
@@ -51,9 +51,9 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
       ],
       stubbed_response: '{"content":"Aang"}'
     ) do
-      describe 'return value', vcr: true do
+      describe 'return value', :vcr do
         it 'returns the expected scalar value' do
-          expect(action.call).to be_eql('Aang')
+          expect(action.call).to eql('Aang')
         end
       end
     end
@@ -76,7 +76,7 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
       ],
       stubbed_response: '["Marketing","Production"]'
     ) do
-      describe 'return value', vcr: true do
+      describe 'return value', :vcr do
         it 'returns the expected array' do
           expect(action.call).to match_array(%w[Marketing Production])
         end
@@ -85,7 +85,7 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
   end
 
   describe 'mixed, multiple fields, mixed' do
-    describe 'integration test', vcr: true do
+    describe 'integration test', :vcr do
       let(:action) do
         JabberAdmin.get_vcard!(
           :fn,
