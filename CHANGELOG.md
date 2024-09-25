@@ -2,32 +2,32 @@
 
 * TODO: Replace this bullet point with an actual description of a change.
 
-### 1.3.4
+### 1.3.4 (15 August 2024)
 
 * Just a retag of 1.3.1
 
-### 1.3.3
+### 1.3.3 (15 August 2024)
 
 * Just a retag of 1.3.1
 
-### 1.3.2
+### 1.3.2 (9 August 2024)
 
 * Just a retag of 1.3.1
 
-### 1.3.1
+### 1.3.1 (9 August 2024)
 
 * Added API docs building to continuous integration (#14)
 
-### 1.3.0
+### 1.3.0 (8 July 2024)
 
 * Moved the development dependencies from the gemspec to the Gemfile (#12)
 * Dropped support for Ruby <2.7 (#13)
 
-### 1.2.0
+### 1.2.0 (24 February 2023)
 
 * Added support for Gem release automation
 
-### 1.1.0
+### 1.1.0 (18 January 2023)
 
 * Bundler >= 2.3 is from now on required as minimal version (#11)
 * Dropped support for Ruby < 2.5 (#11)
@@ -35,32 +35,32 @@
 * Updated all development/runtime gems to their latest
   Ruby 2.5 compatible version (#11)
 
-### 1.0.5
+### 1.0.5 (20 January 2022)
 
 * Added support for the predefined command `get_room_affiliations` (#10)
 * Added the top-level helper `JabberAdmin.room_exist?` to determine whether
   a room exists or not (#10)
 
-### 1.0.4
+### 1.0.4 (11 November 2021)
 
 * Added support for the predefined command `destroy_room`
 
-### 1.0.3
+### 1.0.3 (15 October 2021)
 
 * Migrated to Github Actions
 * Migrated to our own coverage reporting
 * Added the code statistics to the test process
 
-### 1.0.2
+### 1.0.2 (12 May 2021)
 
 * Corrected the GNU Make release target
 * Corrected the empty arguments check
 
-### 1.0.1
+### 1.0.1 (13 October 2020)
 
 * Gracefully handle a missing vCard when a vCard field is queried (#7)
 
-### 1.0.0
+### 1.0.0 (13 October 2020)
 
 * All `JabberAdmin` errors `[UnknownCommandError, CommandError, RequestError]`
   now ship the response object correctly (was always set to `nil` previously)
@@ -71,7 +71,7 @@
 * Dropped support for Ruby <2.5 (#6)
 * Added some versioning helpers (eg. `JabberAdmin.version`)
 
-### 0.2.0
+### 0.2.0 (14 May 2018)
 
 * [BC] The configuration has changed
   * `api_host` => `url`, we require now the full base URL of the REST API, this
@@ -94,7 +94,7 @@
 * The testcases were rewritten and tested with VCR against a real ejabberd
   server (18.01)
 
-### 0.1.4
+### 0.1.4 (23 January 2018)
 
 * Added support for predefined commands
   * ban_account
