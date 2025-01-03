@@ -82,12 +82,15 @@ module JabberAdmin
   # it is present)
   #
   # @param method [Symbol, String, #to_s] the name of the command to run
-  # @param args all additional payload to pass down to the API call
+  # @param args [Array<Mixed>] all additional API call payload
+  # @param kwargs [Hash{Symbol => Mixed}] all additional API call payload
   # @return [RestClient::Response] the actual response of the command
-  def self.method_missing(method, *args)
-    predefined_command(method).call(predefined_callable(method), *args)
+  def self.method_missing(method, *args, **kwargs)
+    predefined_command(method).call(
+      predefined_callable(method), *args, **kwargs
+    )
   rescue NameError
-    predefined_callable(method).call(method.to_s.chomp('!'), *args)
+    predefined_callable(method).call(method.to_s.chomp('!'), *args, **kwargs)
   end
 
   # Try to find the given name as a predefined command. When there is no such
