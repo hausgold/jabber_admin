@@ -2,9 +2,14 @@
 
 require 'spec_helper'
 
-shared_examples 'a command' do |with_name:, with_called_name: nil,
+# rubocop:disable Metrics/ParameterLists because of the various
+#   configuration options
+shared_examples 'a command' do |with_name:,
+                                with_called_name: nil,
                                 stubbed_response: nil,
-                                with_input_args: [], with_called_args: []|
+                                with_input_args: [],
+                                with_input_kwargs: {},
+                                with_called_kwargs: {}|
   with_called_name ||= with_name
   let(:callable) { JabberAdmin.predefined_callable(with_name) }
   let(:res) do
@@ -13,7 +18,9 @@ shared_examples 'a command' do |with_name:, with_called_name: nil,
   let(:action) do
     proc do |actual_callable|
       actual_callable ||= callable
-      described_class.call(actual_callable, *with_input_args)
+      described_class.call(
+        actual_callable, *with_input_args, **with_input_kwargs
+      )
     end
   end
 
@@ -33,7 +40,7 @@ shared_examples 'a command' do |with_name:, with_called_name: nil,
     action[callable]
   end
 
-  if with_input_args.empty?
+  if with_input_args.empty? && with_called_kwargs.empty?
     it 'passes no further arguments to the callable' do
       callable = proc do |_command, payload = {}|
         expect(payload).to be_empty
@@ -44,7 +51,7 @@ shared_examples 'a command' do |with_name:, with_called_name: nil,
     end
   end
 
-  (with_called_args.first || []).each do |key, value|
+  with_called_kwargs.each do |key, value|
     it "passes the '#{key}' symbol to the callable" do
       hash = { key => value }
       callable = proc do |_command, payload = {}|
@@ -58,9 +65,13 @@ shared_examples 'a command' do |with_name:, with_called_name: nil,
   # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
 
   describe 'integration test', :vcr do
+    let(:action) do
+      JabberAdmin.send("#{with_name}!", *with_input_args, **with_input_kwargs)
+    end
+
     it 'raises no errors' do
-      expect { JabberAdmin.send("#{with_name}!", *with_input_args) }.not_to \
-        raise_error
+      expect { action }.not_to raise_error
     end
   end
 end
+# rubocop:enable Metrics/ParameterLists
