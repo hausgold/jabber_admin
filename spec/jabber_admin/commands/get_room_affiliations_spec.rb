@@ -17,13 +17,13 @@ RSpec.describe JabberAdmin::Commands::GetRoomAffiliations do
 
       it_behaves_like 'a command',
                       with_name: 'get_room_affiliations',
-                      with_input_args: [
+                      with_input_kwargs: {
                         room: 'room1@conference.ejabberd.local'
-                      ],
-                      with_called_args: [
+                      },
+                      with_called_kwargs: {
                         name: 'room1',
                         service: 'conference.ejabberd.local'
-                      ]
+                      }
 
       it 'returns the room affiliations' do
         expect(action).to include(a_hash_including({
@@ -38,13 +38,13 @@ RSpec.describe JabberAdmin::Commands::GetRoomAffiliations do
 
       it_behaves_like 'a command',
                       with_name: 'get_room_affiliations',
-                      with_input_args: [
+                      with_input_kwargs: {
                         room: 'room2@conference.ejabberd.local'
-                      ],
-                      with_called_args: [
+                      },
+                      with_called_kwargs: {
                         name: 'room2',
                         service: 'conference.ejabberd.local'
-                      ]
+                      }
 
       it 'returns empty room affiliations' do
         expect(action).to eql([])

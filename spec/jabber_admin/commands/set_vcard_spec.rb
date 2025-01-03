@@ -8,50 +8,50 @@ RSpec.describe JabberAdmin::Commands::SetVcard do
   describe 'first level, single field, scalar value' do
     it_behaves_like 'a command',
                     with_name: 'set_vcard',
-                    with_input_args: [
+                    with_input_kwargs: {
                       user: 'admin@jabber.local',
                       fn: 'The Admin'
-                    ],
-                    with_called_args: [
+                    },
+                    with_called_kwargs: {
                       user: 'admin',
                       host: 'jabber.local',
                       name: 'FN',
                       content: 'The Admin'
-                    ]
+                    }
   end
 
   describe 'second level, single field, scalar value' do
     it_behaves_like 'a command',
                     with_name: 'set_vcard',
                     with_called_name: 'set_vcard2',
-                    with_input_args: [
+                    with_input_kwargs: {
                       user: 'admin@jabber.local',
                       'n.given': 'Aang'
-                    ],
-                    with_called_args: [
+                    },
+                    with_called_kwargs: {
                       user: 'admin',
                       host: 'jabber.local',
                       name: 'N',
                       subname: 'GIVEN',
                       content: 'Aang'
-                    ]
+                    }
   end
 
   describe 'second level, single field, array value' do
     it_behaves_like 'a command',
                     with_name: 'set_vcard',
                     with_called_name: 'set_vcard2_multi',
-                    with_input_args: [
+                    with_input_kwargs: {
                       user: 'admin@jabber.local',
                       'org.orgunit[]': %w[Marketing Production]
-                    ],
-                    with_called_args: [
+                    },
+                    with_called_kwargs: {
                       user: 'admin',
                       host: 'jabber.local',
                       name: 'ORG',
                       subname: 'ORGUNIT',
                       contents: %w[Marketing Production]
-                    ]
+                    }
   end
 
   describe 'mixed, multiple fields, mixed' do

@@ -160,8 +160,8 @@ RSpec.describe JabberAdmin do
 
     it 'passes down arguments' do
       args = { user: 'Tom', room: 'Basement' }
-      expect(JabberAdmin::ApiCall).to receive(:perform).once.with(*args)
-      described_class.predefined_callable('unknown').call(*args)
+      expect(JabberAdmin::ApiCall).to receive(:perform).once.with(**args)
+      described_class.predefined_callable('unknown').call(**args)
     end
   end
 

@@ -9,15 +9,13 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
     it_behaves_like(
       'a command',
       with_name: 'get_vcard',
-      with_input_args: [
-        :fn,
-        { user: 'admin@jabber.local' }
-      ],
-      with_called_args: [
+      with_input_args: [:fn],
+      with_input_kwargs: { user: 'admin@jabber.local' },
+      with_called_kwargs: {
         user: 'admin',
         host: 'jabber.local',
         name: 'FN'
-      ],
+      },
       stubbed_response: '{"content":"The Admin"}'
     ) do
       describe 'return value', :vcr do
@@ -39,16 +37,14 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
       'a command',
       with_name: 'get_vcard',
       with_called_name: 'get_vcard2',
-      with_input_args: [
-        'n.given',
-        { user: 'admin@jabber.local' }
-      ],
-      with_called_args: [
+      with_input_args: ['n.given'],
+      with_input_kwargs: { user: 'admin@jabber.local' },
+      with_called_kwargs: {
         user: 'admin',
         host: 'jabber.local',
         name: 'N',
         subname: 'GIVEN'
-      ],
+      },
       stubbed_response: '{"content":"Aang"}'
     ) do
       describe 'return value', :vcr do
@@ -64,16 +60,14 @@ RSpec.describe JabberAdmin::Commands::GetVcard do
       'a command',
       with_name: 'get_vcard',
       with_called_name: 'get_vcard2_multi',
-      with_input_args: [
-        'org.orgunit[]',
-        { user: 'admin@jabber.local' }
-      ],
-      with_called_args: [
+      with_input_args: ['org.orgunit[]'],
+      with_input_kwargs: { user: 'admin@jabber.local' },
+      with_called_kwargs: {
         user: 'admin',
         host: 'jabber.local',
         name: 'ORG',
         subname: 'ORGUNIT'
-      ],
+      },
       stubbed_response: '["Marketing","Production"]'
     ) do
       describe 'return value', :vcr do

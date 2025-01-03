@@ -5,13 +5,13 @@ require 'spec_helper'
 RSpec.describe JabberAdmin::Commands::CreateRoom do
   it_behaves_like 'a command',
                   with_name: 'create_room',
-                  with_input_args: [
+                  with_input_kwargs: {
                     room: 'room1@conference.ejabberd.local',
                     host: 'ejabberd.local'
-                  ],
-                  with_called_args: [
+                  },
+                  with_called_kwargs: {
                     name: 'room1',
                     service: 'conference.ejabberd.local',
                     host: 'ejabberd.local'
-                  ]
+                  }
 end
