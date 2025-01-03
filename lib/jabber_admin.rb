@@ -112,7 +112,7 @@ module JabberAdmin
   # @return [Proc] the API call wrapper
   def self.predefined_callable(name)
     method = name.to_s.end_with?('!') ? 'perform!' : 'perform'
-    proc { |*args| ApiCall.send(method, *args) }
+    proc { |*args, **kwargs| ApiCall.send(method, *args, **kwargs) }
   end
 
   # Determine if a room exists. This is a convenience method for the

@@ -48,13 +48,13 @@ RSpec.describe JabberAdmin do
 
         it 'passes no arguments when none are given' do
           expect(JabberAdmin::ApiCall).to \
-            receive(:perform!).once.with('restart')
+            receive(:perform!).once.with('restart', {})
           described_class.restart!
         end
 
         it 'passes no block when one is given' do
           expect(JabberAdmin::ApiCall).to \
-            receive(:perform!).once.with('restart')
+            receive(:perform!).once.with('restart', {})
           described_class.restart! { true }
         end
       end
@@ -70,13 +70,13 @@ RSpec.describe JabberAdmin do
 
         it 'passes no arguments when none are given' do
           expect(JabberAdmin::ApiCall).to \
-            receive(:perform).once.with('restart')
+            receive(:perform).once.with('restart', {})
           described_class.restart
         end
 
         it 'passes no block when one is given' do
           expect(JabberAdmin::ApiCall).to \
-            receive(:perform).once.with('restart')
+            receive(:perform).once.with('restart', {})
           described_class.restart { true }
         end
       end
@@ -92,13 +92,13 @@ RSpec.describe JabberAdmin do
 
         it 'passes no arguments when none are given' do
           expect(JabberAdmin::ApiCall).to \
-            receive(:perform!).once.with('unknown')
+            receive(:perform!).once.with('unknown', {})
           described_class.unknown!
         end
 
         it 'passes no block when one is given' do
           expect(JabberAdmin::ApiCall).to \
-            receive(:perform!).once.with('unknown')
+            receive(:perform!).once.with('unknown', {})
           described_class.unknown! { true }
         end
       end
@@ -112,13 +112,13 @@ RSpec.describe JabberAdmin do
 
         it 'passes no arguments when none are given' do
           expect(JabberAdmin::ApiCall).to \
-            receive(:perform).once.with('unknown')
+            receive(:perform).once.with('unknown', {})
           described_class.unknown
         end
 
         it 'passes no block when one is given' do
           expect(JabberAdmin::ApiCall).to \
-            receive(:perform).once.with('unknown')
+            receive(:perform).once.with('unknown', {})
           described_class.unknown { true }
         end
       end
@@ -160,8 +160,8 @@ RSpec.describe JabberAdmin do
 
     it 'passes down arguments' do
       args = { user: 'Tom', room: 'Basement' }
-      expect(JabberAdmin::ApiCall).to receive(:perform).once.with(*args)
-      described_class.predefined_callable('unknown').call(*args)
+      expect(JabberAdmin::ApiCall).to receive(:perform).once.with(**args)
+      described_class.predefined_callable('unknown').call(**args)
     end
   end
 
