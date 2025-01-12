@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'activesupport', '>= 6.1'
   spec.add_dependency 'rest-client', '~> 2.1'
+  spec.add_dependency 'zeitwerk', '~> 2.6'
 end
