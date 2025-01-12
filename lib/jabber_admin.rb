@@ -64,7 +64,7 @@ module JabberAdmin
   require 'jabber_admin/version'
   require 'jabber_admin/errors'
 
-  # Make sure to eager load all SDK constants
+  # Make sure to eager load all constants
   loader.eager_load
 
   class << self
