@@ -3,7 +3,7 @@
 # The gem version details.
 module JabberAdmin
   # The version of the +jabber_admin+ gem
-  VERSION = '1.5.1'
+  VERSION = '1.6.0'
 
   class << self
     # Returns the version of gem as a string.
