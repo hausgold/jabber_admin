@@ -32,9 +32,10 @@ module JabberAdmin
       #   set to the vCard
       # @return [Hash] the vCard details
       #
-      # rubocop:disable Metrics/MethodLength because the ejabberd REST API is
-      #   hard to use in complex scenarios, so we have to work around it
-      # rubocop:disable Metrics/AbcSize dito
+      # rubocop:disable Metrics/MethodLength -- because the ejabberd REST API
+      #   is hard to use in complex scenarios, so we have to work
+      #   around it
+      # rubocop:disable Metrics/AbcSize -- dito
       def self.call(callable, args = {}, user:, **sym_args)
         args = args.merge(sym_args)
         uid, host = user.split('@')

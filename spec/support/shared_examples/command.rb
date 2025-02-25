@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-# rubocop:disable Metrics/ParameterLists because of the various
+# rubocop:disable Metrics/ParameterLists -- because of the various
 #   configuration options
 shared_examples 'a command' do |with_name:,
                                 with_called_name: nil,
@@ -29,8 +29,9 @@ shared_examples 'a command' do |with_name:,
     action.call
   end
 
-  # rubocop:disable RSpec/MultipleExpectations because of the test abstraction
-  # rubocop:disable RSpec/ExampleLength because of the test abstraction
+  # rubocop:disable RSpec/MultipleExpectations -- because of the test
+  #   abstraction
+  # rubocop:disable RSpec/ExampleLength -- because of the test abstraction
   it "passes '#{with_called_name}' as command name to the callable" do
     callable = proc do |command, _payload = {}|
       expect(command).to eql(with_called_name)

@@ -177,7 +177,7 @@ RSpec.describe JabberAdmin::ApiCall do
     end
 
     it 'passes all arguments to a fresh instance' do
-      expect(described_class).to receive(:new) \
+      expect(described_class).to receive(:new)
         .with('another_command', test: true).once.and_return(instance)
       described_class.perform!('another_command', test: true)
     end
@@ -195,7 +195,7 @@ RSpec.describe JabberAdmin::ApiCall do
     end
 
     it 'passes all arguments to a fresh instance' do
-      expect(described_class).to receive(:new) \
+      expect(described_class).to receive(:new)
         .with('another_command', test: true).once.and_return(instance)
       described_class.perform('another_command', test: true)
     end

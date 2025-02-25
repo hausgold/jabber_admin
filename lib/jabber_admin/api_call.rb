@@ -51,8 +51,8 @@ module JabberAdmin
     # @raise JabberAdmin::ApiError
     # @raise JabberAdmin::CommandError
     #
-    # rubocop:disable Metrics/AbcSize because its the bundled check logic
-    # rubocop:disable Metrics/MethodLength dito
+    # rubocop:disable Metrics/AbcSize -- because its the bundled check logic
+    # rubocop:disable Metrics/MethodLength -- dito
     def check_response
       # The REST API responds a 404 status code when the command is not known.
       if response.code == 404
