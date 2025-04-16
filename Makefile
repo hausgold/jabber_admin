@@ -126,6 +126,8 @@ test-style-ruby:
 clean:
 	# Clean the dependencies
 	@$(RM) -rf $(VENDOR_DIR)
+	@$(RM) -rf $(GEMFILES_DIR)/vendor
+	@$(RM) -rf $(GEMFILES_DIR)/*.lock
 	@$(RM) -rf .bundle .yardoc coverage pkg Gemfile.lock doc/api \
 		.rspec_status
 
