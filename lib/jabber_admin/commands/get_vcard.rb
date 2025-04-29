@@ -34,9 +34,9 @@ module JabberAdmin
       # rubocop:disable Metrics/MethodLength -- because the ejabberd REST API
       #   is hard to use in complex scenarios, so we have to work
       #   around it
-      # rubocop:disable Metrics/AbcSize -- dito
-      # rubocop:disable Metrics/CyclomaticComplexity -- dito
-      # rubocop:disable Metrics/PerceivedComplexity -- dito
+      # rubocop:disable Metrics/AbcSize -- ditto
+      # rubocop:disable Metrics/CyclomaticComplexity -- ditto
+      # rubocop:disable Metrics/PerceivedComplexity -- ditto
       def self.call(callable, *keys, user:)
         uid, host = user.split('@')
         val = proc do |key|
