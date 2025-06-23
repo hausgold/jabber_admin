@@ -68,7 +68,7 @@ module JabberAdmin
         end
 
         # When just one key is requested, we return the value directly
-        return val[keys.first] if keys.count == 1
+        return val[keys.first] if keys.one?
 
         # When multiple keys are requested, we assemble a hash
         keys.to_h do |key|
