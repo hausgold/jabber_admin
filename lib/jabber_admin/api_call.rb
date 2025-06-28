@@ -111,8 +111,8 @@ module JabberAdmin
     # @param args [Array<Mixed>] the initializer arguments
     # @param kwargs [Hash{Symbol => Mixed}] the initializer arguments
     # @return [RestClient::Response] the API call response
-    def self.perform(*args, **kwargs)
-      new(*args, **kwargs).perform
+    def self.perform(*, **)
+      new(*, **).perform
     end
 
     # A simple class level shortcut of the +perform!+ method. This is just DSL
@@ -125,8 +125,8 @@ module JabberAdmin
     #
     # @raise JabberAdmin::ApiError
     # @raise JabberAdmin::CommandError
-    def self.perform!(*args, **kwargs)
-      new(*args, **kwargs).perform!
+    def self.perform!(*, **)
+      new(*, **).perform!
     end
   end
 end

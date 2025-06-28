@@ -18,6 +18,6 @@ gem "vcr", "~> 6.0"
 gem "webmock", "~> 3.18"
 gem "yard", ">= 0.9.28"
 gem "yard-activesupport-concern", ">= 0.0.1"
-gem "activesupport", "~> 7.1.0"
+gem "activesupport", "~> 7.2.0"
 
 gemspec path: "../"
