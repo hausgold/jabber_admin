@@ -1,6 +1,6 @@
 ### next
 
-* TODO: Replace this bullet point with an actual description of a change.
+* Added support for Rails 8.1 (#23)
 
 ### 2.0.0 (28 June 2025)
 
