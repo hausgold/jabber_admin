@@ -5,12 +5,11 @@ require 'spec_helper'
 # rubocop:disable Metrics/ParameterLists -- because of the various
 #   configuration options
 shared_examples 'a command' do |with_name:,
-                                with_called_name: nil,
+                                with_called_name: with_name,
                                 stubbed_response: nil,
                                 with_input_args: [],
                                 with_input_kwargs: {},
                                 with_called_kwargs: {}|
-  with_called_name ||= with_name
   let(:callable) { JabberAdmin.predefined_callable(with_name) }
   let(:res) do
     instance_double(RestClient::Response, body: stubbed_response, code: 200)
