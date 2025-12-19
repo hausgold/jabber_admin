@@ -16,7 +16,6 @@ module JabberAdmin
       # @param priority [String] presence priority (eg. +7+)
       #
       # rubocop:disable Metrics/ParameterLists -- because of the mapping
-      # rubocop:disable Metrics/MethodLength -- because of the mapping
       def self.call(callable, user:, type: 'available', show: 'chat',
                     status: '', priority: '7')
         uid, host = user.split('@')
@@ -31,7 +30,7 @@ module JabberAdmin
                       status: status,
                       priority: priority)
       end
-      # rubocop:enable Metrics/ParameterLists, Metrics/MethodLength
+      # rubocop:enable Metrics/ParameterLists
     end
   end
 end

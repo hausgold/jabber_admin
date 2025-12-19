@@ -1,11 +1,12 @@
+inherit_from:
+  - https://potpourri.hausgold.de/config/rubocop.yml
+  - https://potpourri.hausgold.de/config/rubocop-gem.yml
+
 plugins:
   - rubocop-rspec
   - rubocop-rails
 
 Rails:
-  Enabled: true
-
-Style/Documentation:
   Enabled: true
 
 AllCops:
@@ -20,34 +21,3 @@ AllCops:
     - config/**/*
     - build/**/*
     - gemfiles/**/*
-
-Metrics/BlockLength:
-  Exclude:
-    - Rakefile
-    - spec/**/*.rb
-    - '**/*.rake'
-    - '*.gemspec'
-
-# MFA is not yet enabled for our gems yet.
-Gemspec/RequireMFA:
-  Enabled: false
-
-# Document all the things.
-Style/DocumentationMethod:
-  Enabled: true
-  RequireForNonPublicMethods: true
-
-# Because +expect_any_instance_of().to have_received()+ is not
-# supported with the +with(hash_including)+ matchers
-RSpec/MessageSpies:
-  EnforcedStyle: receive
-
-# Allow deeper nesting because of the predefined/non-predefined -
-# bang/non-bang cases.
-RSpec/NestedGroups:
-  Max: 4
-
-# We stay at 80 characters per line.
-# See: https://rubystyle.guide/#max-line-length
-Layout/LineLength:
-  Max: 80
