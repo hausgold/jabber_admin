@@ -21,25 +21,25 @@ RSpec.describe JabberAdmin::ApiCall do
   end
 
   describe '#url' do
-    it 'produces the correct URL with trailling slash and whitespaces' do
+    it 'produces the correct URL with trailing slash and whitespaces' do
       allow(JabberAdmin.configuration).to \
-        receive(:url).and_return("\n http://with.trailling.slash/api/  \n")
+        receive(:url).and_return("\n http://with.trailing.slash/api/  \n")
       expect(instance.url).to \
-        eql('http://with.trailling.slash/api/restart')
+        eql('http://with.trailing.slash/api/restart')
     end
 
-    it 'produces the correct URL with trailling slash' do
+    it 'produces the correct URL with trailing slash' do
       allow(JabberAdmin.configuration).to \
-        receive(:url).and_return('http://with.trailling.slash/api/')
+        receive(:url).and_return('http://with.trailing.slash/api/')
       expect(instance.url).to \
-        eql('http://with.trailling.slash/api/restart')
+        eql('http://with.trailing.slash/api/restart')
     end
 
-    it 'produces the correct URL without trailling slash' do
+    it 'produces the correct URL without trailing slash' do
       allow(JabberAdmin.configuration).to \
-        receive(:url).and_return('http://without.trailling.slash/api')
+        receive(:url).and_return('http://without.trailing.slash/api')
       expect(instance.url).to \
-        eql('http://without.trailling.slash/api/restart')
+        eql('http://without.trailing.slash/api/restart')
     end
   end
 

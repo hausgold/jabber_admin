@@ -21,14 +21,14 @@ module JabberAdmin
 
     # The resulting URL of the API call. This URL is constructed with the
     # +JabberAdmin.configuration.url+ as base and the command name as the
-    # suffix. The configuration is allowed to end with trailling slash, or not.
+    # suffix. The configuration is allowed to end with trailing slash, or not.
     #
     # @return [String] the API call URL
     def url
       "#{JabberAdmin.configuration.url.strip.chomp('/')}/#{@command}"
     end
 
-    # This method compose the actual request, perfoms it and stores the
+    # This method compose the actual request, performs it and stores the
     # response to the instance.  Additional calls to this method will not
     # repeat the request, but will deliver the response directly.
     #
@@ -88,7 +88,7 @@ module JabberAdmin
     end
 
     # Just a simple DSL wrapper for the response method. But this variant
-    # perfoms a response check which will raise excpetions when there are
+    # performs a response check which will raise exceptions when there are
     # issues.
     #
     # @raise JabberAdmin::ApiError

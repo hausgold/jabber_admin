@@ -93,7 +93,7 @@ module JabberAdmin
     # perform the response checks and raise in case of issues. The non-bang
     # versions skip this checks. For unknown commands the
     # +JabberAdmin::ApiCall+ is directly utilized with the method name as
-    # command. (Without the trailling bang, when it is present)
+    # command. (Without the trailing bang, when it is present)
     #
     # @param method [Symbol, String, #to_s] the name of the command to run
     # @param args [Array<Mixed>] all additional API call payload

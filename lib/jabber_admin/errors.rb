@@ -15,7 +15,7 @@ module JabberAdmin
 
     # Create a new exception.
     #
-    # @param msg [String] the excpetion message
+    # @param msg [String] the exception message
     # @param response [RestClient::Response] the response when available
     def initialize(msg, response = nil)
       @response = response
@@ -24,8 +24,8 @@ module JabberAdmin
     end
   end
 
-  # This exception is raised when the request was denied due to premission
-  # issues or a general unavaliability of the command on the REST API. This
+  # This exception is raised when the request was denied due to permission
+  # issues or a general unavailability of the command on the REST API. This
   # simply means the response code from ejabberd was not 200 OK.
   class RequestError < Error; end
 
