@@ -62,7 +62,8 @@ shared_examples 'a command' do |with_name:,
       action[callable]
     end
   end
-  # rubocop:enable RSpec/MultipleExpectations, RSpec/ExampleLength
+  # rubocop:enable RSpec/MultipleExpectations
+  # rubocop:enable RSpec/ExampleLength
 
   describe 'integration test', :vcr do
     let(:action) do
