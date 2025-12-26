@@ -1,7 +1,11 @@
 ### next
 
-* Added Ruby 4.0 support (#26)
-* Dropped Ruby 3.2 and Rails 7.1 support (#25)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.3.0 (26 December 2025)
+
+* Added Ruby 4.0 support ([#26](https://github.com/hausgold/jabber_admin/pull/26))
+* Dropped Ruby 3.2 and Rails 7.1 support ([#25](https://github.com/hausgold/jabber_admin/pull/25))
 
 ### 2.2.0 (19 December 2025)
 
