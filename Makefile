@@ -90,7 +90,8 @@ endif
 install:
 	# Install the dependencies
 	@$(MKDIR) -p $(VENDOR_DIR)
-	@$(call run-shell,$(BUNDLE) check || $(BUNDLE) install --path $(VENDOR_DIR))
+	@$(call run-shell,$(BUNDLE) config set --local path '$(VENDOR_DIR)')
+	@$(call run-shell,$(BUNDLE) check || $(BUNDLE) install)
 	@$(call run-shell,$(BUNDLE) exec $(APPRAISAL) install)
 
 update:
