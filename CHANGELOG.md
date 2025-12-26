@@ -1,5 +1,6 @@
 ### next
 
+* Added Ruby 4.0 support (#26)
 * Dropped Ruby 3.2 and Rails 7.1 support (#25)
 
 ### 2.2.0 (19 December 2025)
