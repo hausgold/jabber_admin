@@ -3,6 +3,7 @@
 # Print some information
 #
 # rubocop:disable Rails/Output -- because we want to write to stdout here
+# rubocop:disable RSpec/Output -- ditto
 puts
 puts <<DESC
   -------------- Versions --------------
@@ -12,3 +13,4 @@ puts <<DESC
 DESC
 puts
 # rubocop:enable Rails/Output
+# rubocop:enable RSpec/Output
