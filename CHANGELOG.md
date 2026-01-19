@@ -2,6 +2,10 @@
 
 * TODO: Replace this bullet point with an actual description of a change.
 
+### 2.5.0 (19 January 2026)
+
+* TODO: Replace this bullet point with an actual description of a change.
+
 ### 2.4.0 (7 January 2026)
 
 * Upgraded to Ubuntu 24.04 on Github Actions ([#28](https://github.com/hausgold/jabber_admin/pull/28))
