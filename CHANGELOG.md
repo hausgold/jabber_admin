@@ -1,6 +1,10 @@
 ### next
 
-* Dropped Rails 7.1 support (#29)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.6.0 (28 January 2026)
+
+* Dropped Rails 7.1 support ([#29](https://github.com/hausgold/jabber_admin/pull/29))
 
 ### 2.5.0 (19 January 2026)
 
