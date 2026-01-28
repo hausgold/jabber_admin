@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 3.3'
 
-  spec.add_dependency 'activesupport', '>= 7.2'
+  spec.add_dependency 'activesupport', '>= 8.0'
   spec.add_dependency 'rest-client', '~> 2.1'
   spec.add_dependency 'zeitwerk', '~> 2.6'
 end
