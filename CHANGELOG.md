@@ -1,7 +1,11 @@
 ### next
 
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.7.0 (18 February 2026)
+
 * Dropped 3rd-level gem dependencies which are not directly used
-  by this gem (#30)
+  by this gem ([#30](https://github.com/hausgold/jabber_admin/pull/30))
 
 ### 2.6.0 (28 January 2026)
 
