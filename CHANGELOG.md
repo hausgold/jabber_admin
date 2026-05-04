@@ -1,6 +1,10 @@
 ### next
 
-* Dropped Ruby 3.x and Rails <8.1 support (#31)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 2.8.0 (4 May 2026)
+
+* Dropped Ruby 3.x and Rails <8.1 support ([#31](https://github.com/hausgold/jabber_admin/pull/31))
 
 ### 2.7.0 (18 February 2026)
 
