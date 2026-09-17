@@ -16,7 +16,9 @@ module JabberAdmin
                                                      name: name,
                                                      service: service)
 
-        res.body ? JSON.parse(res.body) : nil
+        # An empty body carries no affiliations to parse
+        body = res.body.to_s
+        body.empty? ? nil : JSON.parse(body)
       end
     end
   end

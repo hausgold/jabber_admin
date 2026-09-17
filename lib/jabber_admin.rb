@@ -4,7 +4,7 @@ require 'zeitwerk'
 require 'logger'
 require 'active_support/inflector'
 require 'json'
-require 'rest-client'
+require 'http'
 
 # jabber_admin
 #
@@ -37,6 +37,10 @@ require 'rest-client'
 #     config.username = 'admin@jabber.local'
 #     # The password of the administrator account.
 #     config.password = 'password'
+#     # The request timeout in seconds, or a per-operation hash
+#     # (eg. +{ connect: 5, read: 30, write: 10 }+), or +nil+ to
+#     # disable it. (60 seconds by default)
+#     config.timeout = 60
 #   end
 #
 # @example Restart the ejabberd service
@@ -97,7 +101,7 @@ module JabberAdmin
     # @param method [Symbol, String, #to_s] the name of the command to run
     # @param args [Array<Mixed>] all additional API call payload
     # @param kwargs [Hash{Symbol => Mixed}] all additional API call payload
-    # @return [RestClient::Response] the actual response of the command
+    # @return [HTTP::Response] the actual response of the command
     def method_missing(method, *, **)
       predefined_command(method).call(
         predefined_callable(method), *, **
@@ -144,7 +148,7 @@ module JabberAdmin
       get_room_affiliations!(room: room)
       true
     rescue JabberAdmin::CommandError => e
-      raise e unless /room does not exist/.match? e.response.body
+      raise e unless /room does not exist/.match? e.response.body.to_s
 
       false
     end

@@ -28,21 +28,31 @@ module JabberAdmin
       "#{JabberAdmin.configuration.url.strip.chomp('/')}/#{@command}"
     end
 
+    # Build a ready to use HTTP client for the API call. It carries the
+    # configured administrator credentials as HTTP basic authentication and
+    # the configured request timeout, when one is set.
+    #
+    # @return [HTTP::Session] the prepared HTTP client
+    def client
+      config = JabberAdmin.configuration
+      session = HTTP.basic_auth(user: config.username, pass: config.password)
+      session = session.timeout(config.timeout) if config.timeout
+      session
+    end
+
     # This method compose the actual request, performs it and stores the
     # response to the instance.  Additional calls to this method will not
     # repeat the request, but will deliver the response directly.
     #
-    # @return [RestClient::Response] the response of the API call
+    # The payload is sent as a JSON document. The response body is read
+    # right away, so the response is complete and the connection is closed
+    # when we hand it out. Any status code is delivered as a regular
+    # response, only connection failures and timeouts raise.
+    #
+    # @return [HTTP::Response] the response of the API call
+    # @raise [HTTP::Error] on connection failures or timeouts
     def response
-      @response ||= RestClient::Request.execute(
-        method: :post,
-        url: url,
-        user: JabberAdmin.configuration.username,
-        password: JabberAdmin.configuration.password,
-        payload: payload.to_json
-      )
-    rescue RestClient::Exception => e
-      @response = e.response
+      @response ||= client.post(url, json: payload).flush
     end
 
     # Check if the response was successful. Otherwise raise exceptions with
@@ -77,12 +87,13 @@ module JabberAdmin
       # not get any further information here, which makes error debugging a
       # struggle.
       raise CommandError.new('Command was not successful', response) \
-        unless response.body == '0'
+        unless response.body.to_s == '0'
     end
 
     # Just a simple DSL wrapper for the response method.
     #
-    # @return [RestClient::Response] the API call response
+    # @return [HTTP::Response] the API call response
+    # @raise [HTTP::Error] on connection failures or timeouts
     def perform
       response
     end
@@ -93,7 +104,8 @@ module JabberAdmin
     #
     # @raise JabberAdmin::ApiError
     # @raise JabberAdmin::CommandError
-    # @return [RestClient::Response] the API call response
+    # @raise [HTTP::Error] on connection failures or timeouts
+    # @return [HTTP::Response] the API call response
     def perform!
       check_response
       response
@@ -105,7 +117,8 @@ module JabberAdmin
     #
     # @param args [Array<Mixed>] the initializer arguments
     # @param kwargs [Hash{Symbol => Mixed}] the initializer arguments
-    # @return [RestClient::Response] the API call response
+    # @return [HTTP::Response] the API call response
+    # @raise [HTTP::Error] on connection failures or timeouts
     def self.perform(*, **)
       new(*, **).perform
     end
@@ -116,10 +129,11 @@ module JabberAdmin
     #
     # @param args [Array<Mixed>] the initializer arguments
     # @param kwargs [Hash{Symbol => Mixed}] the initializer arguments
-    # @return [RestClient::Response] the API call response
+    # @return [HTTP::Response] the API call response
     #
     # @raise JabberAdmin::ApiError
     # @raise JabberAdmin::CommandError
+    # @raise [HTTP::Error] on connection failures or timeouts
     def self.perform!(*, **)
       new(*, **).perform!
     end

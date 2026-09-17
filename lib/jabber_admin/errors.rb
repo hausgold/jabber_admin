@@ -16,7 +16,7 @@ module JabberAdmin
     # Create a new exception.
     #
     # @param msg [String] the exception message
-    # @param response [RestClient::Response] the response when available
+    # @param response [HTTP::Response] the response when available
     def initialize(msg, response = nil)
       @response = response
       msg += " => #{response.body}" if response&.body

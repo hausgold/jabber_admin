@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe JabberAdmin::ApiCall do
   let(:instance) { described_class.new('restart') }
   let(:fake_response) do
-    instance_double(RestClient::Response, code: 200, body: '0')
+    HTTP::Response.new(status: 200, version: '1.1', body: '0')
   end
 
   describe '#new' do
@@ -43,9 +43,65 @@ RSpec.describe JabberAdmin::ApiCall do
     end
   end
 
+  describe '#client' do
+    let(:client) { instance.client }
+    let(:timeout) { 60 }
+
+    before do
+      allow(JabberAdmin.configuration).to \
+        receive_messages(username: 'username',
+                         password: 'password',
+                         timeout: timeout)
+    end
+
+    it 'returns a HTTP session' do
+      expect(client).to be_a(HTTP::Session)
+    end
+
+    it 'configures the basic authentication' do
+      expect(client.default_options.headers['Authorization']).to \
+        eql('Basic dXNlcm5hbWU6cGFzc3dvcmQ=')
+    end
+
+    context 'with a numeric timeout' do
+      it 'configures a global timeout' do
+        expect(client.default_options.timeout_class).to \
+          be(HTTP::Timeout::Global)
+      end
+
+      it 'passes the seconds' do
+        expect(client.default_options.timeout_options).to \
+          eql(global_timeout: 60)
+      end
+    end
+
+    context 'with a per-operation timeout' do
+      let(:timeout) { { connect: 5, read: 30, write: 10 } }
+
+      it 'configures a per-operation timeout' do
+        expect(client.default_options.timeout_class).to \
+          be(HTTP::Timeout::PerOperation)
+      end
+
+      it 'passes the operation limits' do
+        expect(client.default_options.timeout_options).to \
+          eql(connect_timeout: 5, read_timeout: 30, write_timeout: 10)
+      end
+    end
+
+    context 'without a timeout' do
+      let(:timeout) { nil }
+
+      it 'configures no timeout' do
+        expect(client.default_options.timeout_class).to \
+          be(HTTP::Timeout::Null)
+      end
+    end
+  end
+
   describe '#response', :vcr do
-    it 'returns a RestClient::Response instance' do
-      expect(instance.response).to be_a(RestClient::Response)
+    it 'returns a HTTP::Response instance' do
+      expect(instance.response).to be_a(HTTP::Response)
     end
 
     it 'memorizes the response' do
@@ -63,39 +119,42 @@ RSpec.describe JabberAdmin::ApiCall do
       end
 
       it 'sends the payload as a JSON string' do
-        hash = a_hash_including(payload: '{"test":{"test":true}}')
-        expect(RestClient::Request).to receive(:execute).once.with(hash)
+        stub = stub_request(:post, 'http://test/api/status')
+               .with(body: '{"test":{"test":true}}')
         described_class.new('status', test: { test: true }).perform
+        expect(stub).to have_been_requested
       end
 
-      it 'sends the configured username' do
-        hash = a_hash_including(user: 'username')
-        expect(RestClient::Request).to receive(:execute).once.with(hash)
+      it 'sends the payload as a JSON document' do
+        stub = stub_request(:post, 'http://test/api/restart').with(
+          headers: { 'Content-Type' => 'application/json; charset=utf-8' }
+        )
         instance.perform
+        expect(stub).to have_been_requested
       end
 
-      it 'sends the configured password' do
-        hash = a_hash_including(password: 'password')
-        expect(RestClient::Request).to receive(:execute).once.with(hash)
+      it 'sends the configured credentials as basic authentication' do
+        stub = stub_request(:post, 'http://test/api/restart')
+               .with(basic_auth: %w[username password])
         instance.perform
+        expect(stub).to have_been_requested
       end
 
       it 'asks the url method for the correct url' do
-        allow(RestClient::Request).to receive(:execute)
-        expect(instance).to receive(:url).once
+        stub_request(:post, 'http://test/api/restart')
+        expect(instance).to receive(:url).once.and_call_original
         instance.perform
       end
 
-      it 'sends the correct URL' do
-        hash = a_hash_including(url: 'http://test/api/restart')
-        expect(RestClient::Request).to receive(:execute).once.with(hash)
+      it 'sends a POST request to the correct URL' do
+        stub = stub_request(:post, 'http://test/api/restart')
         instance.perform
+        expect(stub).to have_been_requested
       end
 
-      it 'sends a POST request' do
-        hash = a_hash_including(method: :post)
-        expect(RestClient::Request).to receive(:execute).once.with(hash)
-        instance.perform
+      it 'delivers the response body' do
+        stub_request(:post, 'http://test/api/restart').to_return(body: '0')
+        expect(instance.perform.body.to_s).to eql('0')
       end
     end
   end
@@ -142,8 +201,9 @@ RSpec.describe JabberAdmin::ApiCall do
   end
 
   describe '#perform!' do
+    before { stub_request(:post, %r{http://jabber/api/}).to_return(body: '0') }
+
     it 'calls the check_response method' do
-      allow(RestClient::Request).to receive(:execute).and_return(fake_response)
       expect(instance).to receive(:check_response).once
       instance.perform!
     end
@@ -156,8 +216,9 @@ RSpec.describe JabberAdmin::ApiCall do
   end
 
   describe '#perform' do
+    before { stub_request(:post, %r{http://jabber/api/}).to_return(body: '0') }
+
     it 'does not call the check_response method' do
-      allow(RestClient::Request).to receive(:execute).and_return(fake_response)
       expect(instance).not_to receive(:check_response)
       instance.perform
     end
@@ -172,9 +233,7 @@ RSpec.describe JabberAdmin::ApiCall do
   describe '.perform!' do
     let(:instance) { described_class.new('another_command', test: true) }
 
-    before do
-      allow(RestClient::Request).to receive(:execute).and_return(fake_response)
-    end
+    before { stub_request(:post, %r{http://jabber/api/}).to_return(body: '0') }
 
     it 'passes all arguments to a fresh instance' do
       expect(described_class).to receive(:new)
@@ -190,9 +249,7 @@ RSpec.describe JabberAdmin::ApiCall do
   end
 
   describe '.perform' do
-    before do
-      allow(RestClient::Request).to receive(:execute).and_return(fake_response)
-    end
+    before { stub_request(:post, %r{http://jabber/api/}).to_return(body: '0') }
 
     it 'passes all arguments to a fresh instance' do
       expect(described_class).to receive(:new)

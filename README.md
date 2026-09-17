@@ -10,6 +10,7 @@ jabber_admin is a small library to easily communicate with the [ejabberd
 admin API](https://docs.ejabberd.im/developer/ejabberd-api/admin-api).
 
 - [Installation](#installation)
+- [Upgrading](#upgrading)
 - [Configuration](#configuration)
 - [Usage](#usage)
   - [Predefined commands](#predefined-commands)
@@ -39,6 +40,11 @@ Or install it yourself as:
 $ gem install jabber_admin
 ```
 
+## Upgrading
+
+Major releases come with breaking changes. See the [upgrade
+guide](./UPGRADING.md) for the details and the migration steps.
+
 ## Configuration
 
 You can configure the jabber_admin gem in a global initializer way with the
@@ -55,6 +61,10 @@ JabberAdmin.configure do |config|
   config.username = 'admin@jabber.local'
   # The password of the administrator account.
   config.password = 'password'
+  # The request timeout in seconds, or a hash with per-operation limits
+  # (eg. `{ connect: 5, read: 30, write: 10 }`), or `nil` to disable it.
+  # (60 seconds by default)
+  config.timeout = 60
 end
 ```
 
@@ -161,6 +171,22 @@ command.response.object_id # => 21934400
 # A second call to the response method will not perform a request again
 command.response.object_id # => 21934400
 ```
+
+The response is an `HTTP::Response` of the
+[http](https://github.com/httprb/http) gem. Its body is already read, so you
+can access the status code and the body string as often as you like.
+
+```ruby
+response = JabberAdmin.get_last(check_res_body: false,
+                                user: 'tom', host: 'ejabberd.local')
+response.code # => 200
+response.body.to_s # => '{"timestamp":"2026-09-17T10:00:00Z","status":"..."}'
+JSON.parse(response.to_s) # => {"timestamp"=>"2026-09-17T10:00:00Z", ...}
+```
+
+Connection failures and timeouts raise an `HTTP::Error` (eg.
+`HTTP::ConnectionError` or `HTTP::TimeoutError`), on the bang and non-bang
+variants alike.
 
 ## Development
 
