@@ -1,6 +1,10 @@
 ### next
 
-* Switched from the rest-client to the http gem (#34)
+* TODO: Replace this bullet point with an actual description of a change.
+
+### 3.0.0 (18 September 2026)
+
+* Switched from the rest-client to the http gem ([#34](https://github.com/hausgold/jabber_admin/pull/34))
 
 ### 2.10.0 (27 August 2026)
 
