@@ -12,6 +12,10 @@ RSpec.describe JabberAdmin do
       conf = described_class.configuration
       expect(described_class.configuration).to be(conf)
     end
+
+    it 'defaults the timeout to 60 seconds' do
+      expect(described_class.configuration.timeout).to be(60)
+    end
   end
 
   describe '.configure' do

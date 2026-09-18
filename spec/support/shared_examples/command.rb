@@ -12,7 +12,8 @@ shared_examples 'a command' do |with_name:,
                                 with_called_kwargs: {}|
   let(:callable) { JabberAdmin.predefined_callable(with_name) }
   let(:res) do
-    instance_double(RestClient::Response, body: stubbed_response, code: 200)
+    HTTP::Response.new(status: 200, version: '1.1',
+                       body: stubbed_response.to_s)
   end
   let(:action) do
     proc do |actual_callable|

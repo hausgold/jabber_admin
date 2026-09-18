@@ -1,6 +1,6 @@
 ### next
 
-* TODO: Replace this bullet point with an actual description of a change.
+* Switched from the rest-client to the http gem (#34)
 
 ### 2.10.0 (27 August 2026)
 
