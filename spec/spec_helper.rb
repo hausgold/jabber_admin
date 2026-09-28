@@ -3,6 +3,7 @@
 $VERBOSE = nil
 require 'simplecov'
 SimpleCov.command_name 'specs'
+SimpleCov.start
 
 require 'bundler/setup'
 require 'jabber_admin'
